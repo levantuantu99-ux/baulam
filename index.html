@@ -3,123 +3,87 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Không gian số lưu giữ tư liệu lịch sử về Chủ tịch Hồ Chí Minh và biểu dương gương sáng học tập của Hội Phụ nữ xã Bầu Lâm, huyện Xuyên Mộc, tỉnh Bà Rịa-Vũng Tàu."/>
 <title>Di Sản Hồ Chí Minh – Hội Phụ Nữ Bầu Lâm</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"/>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-:root{--primary:#1a4fa0;--primary-light:#2563c4;--gold:#c8922a;--gold-light:#f0c060;--bg:#fafaf8;--bg2:#f2f0eb;--fg:#1a1a18;--muted:#6b6b60;--border:#e0ddd5;--card:#ffffff;--red:#c0392b}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+:root{--primary:#1a4fa0;--primary-light:#2563c4;--gold:#c8922a;--bg:#fafaf8;--bg2:#f2f0eb;--fg:#1a1a18;--muted:#6b6b60;--border:#e0ddd5;--card:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;font-size:15px}
-h1,h2,h3{font-family:'Cormorant Garamond',serif}
-img{max-width:100%;display:block}
-button{cursor:pointer;font-family:inherit}
-a{color:inherit;text-decoration:none}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+h1,h2,h3{font-family:'Cormorant Garamond',serif}img{max-width:100%;display:block}button{cursor:pointer;font-family:inherit}a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px}
 .nav-brand{display:flex;flex-direction:column;gap:1px;cursor:pointer}
-.nav-brand-main{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--primary);letter-spacing:.01em}
+.nav-brand-main{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--primary)}
 .nav-brand-sub{font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
 .nav-links{display:flex;gap:2px}
 .nav-btn{background:none;border:none;padding:7px 13px;border-radius:6px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
-.nav-btn:hover{color:var(--primary);background:rgba(26,79,160,.06)}
-.nav-btn.active{color:var(--primary);background:rgba(26,79,160,.1)}
+.nav-btn:hover{color:var(--primary);background:rgba(26,79,160,.06)}.nav-btn.active{color:var(--primary);background:rgba(26,79,160,.1)}
 .hamburger{display:none;background:none;border:none;font-size:22px;color:var(--fg);padding:4px}
 .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);z-index:99;padding:12px;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
 .mobile-menu.open{display:flex}
 .mobile-btn{background:none;border:none;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);text-align:left;letter-spacing:.04em;text-transform:uppercase}
 .mobile-btn.active,.mobile-btn:hover{color:var(--primary);background:rgba(26,79,160,.08)}
-
-/* PAGES */
 .page{padding-top:64px;min-height:100vh}
-
-/* HERO */
 .hero{padding:90px 32px 80px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(170deg,#f0f5ff 0%,#fafaf8 55%,#fff8ee 100%)}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(26,79,160,.06) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 80% 60%,rgba(200,146,42,.06) 0%,transparent 70%)}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;background:rgba(26,79,160,.08);border:1px solid rgba(26,79,160,.15);border-radius:100px;font-size:11px;font-weight:700;color:var(--primary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,72px);font-weight:700;line-height:1.1;color:var(--fg);margin-bottom:8px}
 .hero-title-accent{color:var(--primary);display:block}
 .hero-sub{font-size:clamp(14px,2vw,17px);color:var(--muted);max-width:580px;margin:20px auto 40px;line-height:1.75;font-weight:300}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--primary);color:#fff;border:none;padding:13px 30px;border-radius:8px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:13px 30px;border-radius:8px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:all .2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .btn-primary:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,79,160,.25)}
-.btn-outline{background:none;border:1.5px solid var(--border);color:var(--fg);padding:12px 28px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
+.btn-outline{background:none;border:1.5px solid var(--border);color:var(--fg);padding:12px 28px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s;cursor:pointer}
 .btn-outline:hover{border-color:var(--primary);color:var(--primary);background:rgba(26,79,160,.04)}
-
-/* SECTION */
 .section{padding:72px 32px;max-width:1120px;margin:0 auto}
-.section-full{padding:72px 32px}
-.section-full .inner{max-width:1120px;margin:0 auto}
+.section-full{padding:72px 32px}.section-full .inner{max-width:1120px;margin:0 auto}
 .section-alt{background:var(--bg2)}
 .section-header{text-align:center;margin-bottom:48px}
 .eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;background:rgba(26,79,160,.08);border-radius:100px;font-size:11px;font-weight:700;color:var(--primary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
 .eyebrow-gold{background:rgba(200,146,42,.1);color:var(--gold)}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--fg);line-height:1.2;margin-bottom:12px}
 .section-desc{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;font-weight:300}
-
-/* GRID */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 @media(max-width:900px){.grid-3{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){
-  .grid-3,.grid-2{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .hamburger{display:block}
-}
-
-/* CARDS */
+@media(max-width:600px){.grid-3,.grid-2{grid-template-columns:1fr}.nav-links{display:none}.hamburger{display:block}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;cursor:pointer}
 .card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(26,79,160,.1);border-color:rgba(26,79,160,.25)}
 .card-img{height:190px;background:linear-gradient(135deg,#e8f0fb,#fdf6e3);display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover;object-position:top}
-.badge-hot{position:absolute;top:12px;right:12px;background:#fbbf24;color:#713f12;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;display:flex;align-items:center;gap:4px}
+.badge-hot{position:absolute;top:12px;right:12px;background:#fbbf24;color:#713f12;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px}
 .card-body{padding:18px 20px}
 .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:rgba(26,79,160,.07);color:var(--primary);letter-spacing:.05em;text-transform:uppercase}
-.tag-gold{background:rgba(200,146,42,.1);color:var(--gold)}
-.tag-green{background:rgba(22,163,74,.08);color:#15803d}
-.card-year{font-size:11px;color:var(--muted);font-weight:400}
+.tag-gold{background:rgba(200,146,42,.1);color:var(--gold)}.tag-green{background:rgba(22,163,74,.08);color:#15803d}
+.card-year{font-size:11px;color:var(--muted)}
 .card-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--fg);margin-bottom:3px;line-height:1.3}
 .card-role{font-size:12px;color:var(--primary);font-weight:600;margin-bottom:10px;line-height:1.4}
 .card-desc{font-size:13px;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px}
 .card-link{font-size:13px;font-weight:600;color:var(--primary);display:flex;align-items:center;gap:5px}
-.card-link-arrow{transition:transform .2s}
-.card:hover .card-link-arrow{transform:translateX(4px)}
-
-/* TIMELINE PREVIEW */
+.card-link-arrow{transition:transform .2s}.card:hover .card-link-arrow{transform:translateX(4px)}
+/* TIMELINE */
 .timeline-preview{overflow-x:auto;padding:16px 0 8px;-webkit-overflow-scrolling:touch}
-.timeline-preview::-webkit-scrollbar{height:4px}
-
-/* VERTICAL TIMELINE */
 .vtl{position:relative;padding:8px 0}
 .vtl::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--primary) 0%,var(--gold) 100%);transform:translateX(-50%);opacity:.3}
 .vt-row{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;margin-bottom:40px;align-items:start}
-.vt-left{padding-right:28px;text-align:right}
-.vt-right{padding-left:28px}
+.vt-left{padding-right:28px;text-align:right}.vt-right{padding-left:28px}
 .vt-center{display:flex;flex-direction:column;align-items:center;padding-top:8px}
 .vt-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex-shrink:0;margin-top:4px}
-.vt-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .2s}
+.vt-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s}
 .vt-card:hover{border-color:rgba(26,79,160,.3);box-shadow:0 6px 20px rgba(26,79,160,.08)}
+.vt-img{width:100%;height:150px;object-fit:cover;display:block}
+.vt-card-body{padding:20px}
 .vt-year{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:6px}
 .vt-cat-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 10px;border-radius:100px;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
-.cat-cd{background:#dbeafe;color:#1d4ed8}
-.cat-sn{background:#dcfce7;color:#166534}
-.cat-tt{background:#ede9fe;color:#6d28d9}
-.cat-ds{background:#fef9c3;color:#854d0e}
+.cat-cd{background:#dbeafe;color:#1d4ed8}.cat-sn{background:#dcfce7;color:#166534}.cat-tt{background:#ede9fe;color:#6d28d9}.cat-ds{background:#fef9c3;color:#854d0e}
 .vt-place{font-size:11px;color:var(--muted);margin-bottom:6px}
 .vt-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--fg);margin-bottom:8px;line-height:1.3}
 .vt-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:10px}
 .vt-note{font-size:12px;color:var(--primary);font-style:italic;padding-left:10px;border-left:2px solid rgba(26,79,160,.25);line-height:1.6}
-
-/* MOBILE TIMELINE FIX */
+.vt-ext-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--primary);background:rgba(26,79,160,.08);padding:7px 14px;border-radius:6px;margin-top:12px;transition:background .2s}
+.vt-ext-link:hover{background:rgba(26,79,160,.15)}
 @media(max-width:600px){
   .vtl::before{left:20px}
   .vt-row{display:flex;flex-direction:row;gap:12px;align-items:flex-start;margin-bottom:28px}
@@ -127,19 +91,14 @@ a{color:inherit;text-decoration:none}
   .vt-center{flex-shrink:0;width:24px;display:flex;flex-direction:column;align-items:center;padding-top:8px}
   .vt-right{flex:1;padding-left:0}
 }
-
-/* FILTER TABS */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
 .tab-btn{background:none;border:1px solid var(--border);padding:7px 18px;border-radius:100px;font-size:12px;font-weight:600;color:var(--muted);transition:all .2s;letter-spacing:.03em}
 .tab-btn:hover,.tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-
-/* TÁC PHẨM */
 .tp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;cursor:pointer}
 .tp-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.tp-cover{height:200px;display:flex;align-items:center;justify-content:center;font-size:68px;background:linear-gradient(135deg,#e8f0fb,#fdf6e3)}
+.tp-cover{height:200px;display:flex;align-items:center;justify-content:center;font-size:68px;background:linear-gradient(135deg,#e8f0fb,#fdf6e3);overflow:hidden}
+.tp-cover img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .tp-body{padding:18px 20px}
-
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(15,15,15,.55);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadein .2s}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
 .modal-box{background:var(--card);border-radius:18px;padding:32px;max-width:560px;width:100%;max-height:86vh;overflow-y:auto;position:relative;animation:slidein .25s;box-shadow:0 24px 60px rgba(0,0,0,.18)}
@@ -151,643 +110,484 @@ a{color:inherit;text-decoration:none}
 .modal-section{margin-top:18px}
 .modal-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
 .modal-text{font-size:13px;color:var(--fg);line-height:1.8;white-space:pre-line}
-.modal-scroll-hint{text-align:center;font-size:11px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px dashed var(--border)}
-
-/* TOAST */
 .toast{position:fixed;bottom:90px;right:28px;z-index:300;background:#1a1a18;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;animation:fadein .25s}
-
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-@media(max-width:600px){.stats-row{grid-template-columns:repeat(3,1fr)}}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
 .stat-number{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--primary);line-height:1}
 .stat-label{font-size:12px;color:var(--muted);margin-top:4px}
-
-/* HỘI PHỤ NỮ BANNER */
 .hpn-banner{background:linear-gradient(135deg,var(--primary) 0%,#1a3a80 100%);color:#fff;padding:72px 32px;text-align:center;position:relative;overflow:hidden}
-.hpn-banner::after{content:'🌸';position:absolute;font-size:200px;opacity:.04;right:-30px;top:-30px;line-height:1}
-
-/* EMPTY */
+/* CONTACT BOX */
+.contact-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-top:48px}
+.contact-box-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--fg);margin-bottom:24px}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:600px){.contact-grid{grid-template-columns:1fr}}
+.ci-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+.ci-value{font-size:13px;color:var(--fg);line-height:1.7}
+.fb-btn{display:inline-flex;align-items:center;gap:8px;background:#1877f2;color:#fff;padding:11px 20px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;margin-top:24px}
+.fb-btn:hover{background:#1565d8;transform:translateY(-1px)}
 .empty{text-align:center;padding:72px 24px}
 .empty-icon{font-size:56px;margin-bottom:16px;opacity:.5}
 .empty-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--fg);margin-bottom:8px}
-.empty-desc{font-size:14px;color:var(--muted)}
-
-/* FLOATING BUTTON */
 .gift-float{position:fixed;bottom:28px;right:28px;z-index:90;width:52px;height:52px;border-radius:50%;background:var(--gold);color:#fff;border:none;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(200,146,42,.4);transition:transform .2s}
 .gift-float:hover{transform:scale(1.12) rotate(-10deg)}
 .view-more{text-align:center;margin-top:36px}
-
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
-@media(max-width:700px){.contact-grid{grid-template-columns:1fr}}
-.contact-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,.6)}
-.contact-icon{font-size:16px;flex-shrink:0;margin-top:2px}
 </style>
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
-const { useState, useEffect } = React;
-
-/* ============================================================
-   DỮ LIỆU — CHỈ SỬA PHẦN NÀY
-   ============================================================ */
-
-/* 1. GƯƠNG SÁNG
-   Lưu ý: 2 người cùng tên Lê Thị Thùy Hương — kiểm tra lại xem có phải
-   cùng 1 người không. Nếu là 1 người thì xoá bớt 1 entry.
-   Nếu 2 người khác nhau thì cần bổ sung thêm thông tin phân biệt.
-*/
+<script>
+/* ============================================================  DỮ LIỆU  ============================================================ */
 const DATA_GUONG_SANG = [
   {
-    id:1,
-    ten:"Lê Thị Thùy Hương",
-    chuc_danh:"Chủ tịch Hội Liên hiệp Phụ nữ xã Bầu Lâm",
-    loai:"Cá Nhân", nam:2024, noi_bat:true,
-    anh:"anh/0a681b3c5_anhLeThi.jpg",
-    mo_ta:"Đồng chí Lê Thị Thùy Hương luôn tiên phong trong các phong trào thi đua yêu nước, vận động hội viên tích cực học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh. Với tinh thần trách nhiệm cao, đồng chí đã xây dựng và duy trì nhiều mô hình hay, cách làm sáng tạo, góp phần nâng cao đời sống vật chất và tinh thần cho phụ nữ địa phương.",
-    chi_tiet:""
-  },
-  {
-    id:2,
-    ten:"Lê Thị Thùy Hương",
-    chuc_danh:"Chi hội trưởng Phụ nữ ấp Suối Lê, xã Bầu Lâm\nĐảng viên hoàn thành xuất sắc nhiệm vụ — Chi hội đạt thành tích xuất sắc năm 2025",
+    id:1, ten:"Lê Đình Dũng",
+    chuc_danh:"Hội viên Hội Nông dân xã Bàu Lâm, nông dân sản xuất kinh doanh giỏi\nĐại biểu Hội đồng nhân dân xã Bàu Lâm",
     loai:"Cá Nhân", nam:2025, noi_bat:false,
-    anh:null,
-    mo_ta:"Gương mẫu học tập theo tư tưởng Hồ Chí Minh, lối sống giản dị, chân thành, luôn bám sát địa bàn và lắng nghe tâm tư của hội viên. Duy trì tổ tiết kiệm 20 triệu đồng, xây dựng mô hình \"Ngôi nhà xanh không đồng\" và lập CLB dân vũ 8 thành viên.",
-    chi_tiet:`Phẩm chất
-Gương mẫu học tập theo tư tưởng Hồ Chí Minh, lối sống giản dị, chân thành, luôn bám sát địa bàn và lắng nghe tâm tư của hội viên.
-
-Hoạt động nổi bật
-• Tích cực phối hợp dọn vệ sinh, diệt lăng quăng phòng dịch, treo cờ dịp lễ Tết
-• Hỗ trợ đắc lực công tác bầu cử tại ấp
-
-An sinh xã hội
-• Vận động mạnh thường quân tặng học bổng cho con em hội viên
-• Tham gia cứu trợ đồng bào bị thiên tai
-
-Mô hình điểm
-• Tổ tiết kiệm 20 triệu đồng (giúp 2 chị phát triển kinh tế)
-• Mô hình "Ngôi nhà xanh không đồng"
-• CLB dân vũ 8 thành viên
-
-Phương hướng 2026
-Phấn đấu xây dựng nông thôn mới kiểu mẫu qua các mô hình "Gia đình 5 không 3 sạch 3 an", "100% tham gia BHYT" và phong trào "Dân vận khéo".`
-  },
-  /* THÊM GƯƠNG SÁNG MỚI BÊN DƯỚI
-  {
-    id:3, ten:"Họ và tên", chuc_danh:"Chức vụ",
-    loai:"Cá Nhân", nam:2025, noi_bat:false, anh:null,
-    mo_ta:"Mô tả ngắn.", chi_tiet:"Chi tiết đầy đủ."
-  }, */
+    anh:"https://i.ex-cdn.com/danviet.vn/files/content/2025/04/28/z6548811153545_68760192cce6b09674d03cbfca53cfb5-1204.jpg",
+    mo_ta:"Gương sáng điển hình về tinh thần vượt khó và ý chí tự học theo gương Bác. Từ rẫy tiêu gặp khó khăn năm 2003, ông xây dựng thành công mô hình nông nghiệp tuần hoàn khép kín 'trồng một loại cây, nuôi hai loại con' (hồ tiêu hữu cơ kết hợp nuôi bò và dê), đạt doanh thu hơn 1,14 tỷ đồng/năm.",
+    chi_tiet:"Mô hình sản xuất\nMô hình nông nghiệp tuần hoàn khép kín 'trồng một loại cây, nuôi hai loại con' (hồ tiêu hữu cơ kết hợp nuôi bò và dê), mang lại doanh thu vượt trội hơn 1,14 tỷ đồng/năm.\n\nTinh thần tự học\nBắt đầu từ rẫy tiêu gặp nhiều khó khăn năm 2003, ông chủ động nghiên cứu khoa học kỹ thuật để vượt khó và xây dựng mô hình bền vững.\n\nĐóng góp cộng đồng\nLuôn sẵn lòng chia sẻ kinh nghiệm, giúp đỡ các hộ nông dân nghèo tại địa phương vươn lên và đi đầu trong các hoạt động bảo vệ môi trường sinh thái.",
+    bai_bao:"https://danviet.vn/them-mot-ty-phu-ba-ria-vung-tau-la-mot-ong-nong-dan-trong-mot-loai-cay-nuoi-2-loai-con-doanh-thu-tien-ty-nam-d1327902.html"
+  }
 ];
 
-/* 2. HÀNH TRÌNH (14 mốc — đã bổ sung 1921, Cách Mạng T8/1945, Toàn Quốc Kháng Chiến 1946) */
 const DATA_HANH_TRINH = [
-  { id:1,  nam:"19/05/1890", ngan:"1890", cat:"Cuộc Đời",  noi:"Kim Liên, Nam Đàn, Nghệ An",
-    tieu_de:"Sinh tại Kim Liên, Nghệ An",
-    mo_ta:"Chủ tịch Hồ Chí Minh sinh ra ngày 19/05/1890 tại làng Kim Liên, huyện Nam Đàn, tỉnh Nghệ An với tên khai sinh Nguyễn Sinh Cung. Người lớn lên trong gia đình nhà nho yêu nước, được thừa hưởng truyền thống cách mạng của quê hương xứ Nghệ — vùng đất địa linh nhân kiệt, giàu tinh thần yêu nước và đấu tranh bất khuất.",
-    y_nghia:"Quê hương và gia đình là nền tảng đầu tiên hun đúc tâm hồn và ý chí yêu nước trong Người." },
-
-  { id:2,  nam:"05/06/1911", ngan:"1911", cat:"Sự Nghiệp", noi:"Bến cảng Nhà Rồng, Sài Gòn",
-    tieu_de:"Rời Bến Cảng Nhà Rồng Ra Đi Tìm Đường Cứu Nước",
-    mo_ta:"Ngày 05/06/1911, với tên Văn Ba, Người rời bến cảng Nhà Rồng (Sài Gòn) ra đi tìm đường cứu nước trên con tàu Amiral Latouche Tréville. Khát vọng giải phóng dân tộc thôi thúc Người bắt đầu hành trình bôn ba khắp năm châu bốn biển, mang theo nỗi đau và ý chí sắt thép của một người con đất Việt.",
-    y_nghia:"Quyết định lịch sử: thay vì đi theo lối mòn của các bậc tiền bối, Người chọn trực tiếp đến các nước phương Tây để tìm hiểu và học hỏi chân lý." },
-
-  { id:3,  nam:"1917",       ngan:"1917", cat:"Sự Nghiệp", noi:"Paris, Pháp",
-    tieu_de:"Hoạt Động Cách Mạng Tại Pháp — Nguyễn Ái Quốc",
-    mo_ta:"Trở lại Pháp và lấy tên Nguyễn Ái Quốc (Người yêu nước), Người tích cực tham gia phong trào công nhân Pháp, viết báo tố cáo tội ác thực dân và đòi quyền tự do, dân chủ cho nhân dân Việt Nam và các dân tộc thuộc địa. Đây là giai đoạn Người bắt đầu hình thành tư tưởng cách mạng và gây dựng uy tín trong phong trào quốc tế.",
-    y_nghia:"Cái tên Nguyễn Ái Quốc lần đầu xuất hiện trên trường quốc tế, trở thành biểu tượng của phong trào giải phóng dân tộc Việt Nam." },
-
-  { id:4,  nam:"12/1920",    ngan:"1920", cat:"Tư Tưởng",  noi:"Tours, Pháp",
-    tieu_de:"Đọc Luận Cương Của Lênin — Tìm Ra Con Đường Cứu Nước",
-    mo_ta:"Khi đọc Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và thuộc địa của V.I. Lênin, Người xúc động đến rơi nước mắt. Tại Đại hội lần thứ 18 của Đảng Xã hội Pháp ở Tours, Người bỏ phiếu tán thành gia nhập Quốc tế Cộng sản và tham gia thành lập Đảng Cộng sản Pháp.",
-    y_nghia:"Bước ngoặt quyết định: từ chủ nghĩa yêu nước chân chính đến chủ nghĩa cộng sản — con đường giải phóng dân tộc gắn liền với giải phóng giai cấp và nhân loại bị áp bức." },
-
-  { id:5,  nam:"1921",       ngan:"1921", cat:"Tư Tưởng",  noi:"Paris, Pháp",
-    tieu_de:"Thành Lập Hội Liên Hiệp Thuộc Địa & Viết «Bản Án Chế Độ Thực Dân Pháp»",
-    mo_ta:"Người tham gia thành lập Hội Liên hiệp các dân tộc thuộc địa và viết tác phẩm nổi tiếng 'Bản án chế độ thực dân Pháp', lên án mạnh mẽ sự tàn bạo của chủ nghĩa thực dân, thức tỉnh lòng yêu nước của nhân dân các nước thuộc địa. Người cũng viết nhiều bài đăng trên các báo 'Người Cùng Khổ', 'Đời sống thợ thuyền'.",
-    y_nghia:"Tác phẩm lý luận đầu tiên của Người có tầm ảnh hưởng quốc tế, đặt nền tảng cho đường lối đấu tranh giải phóng dân tộc theo chủ nghĩa Mác-Lênin." },
-
-  { id:6,  nam:"1925",       ngan:"1925", cat:"Sự Nghiệp", noi:"Quảng Châu, Trung Quốc",
-    tieu_de:"Thành Lập Hội Việt Nam Cách Mạng Thanh Niên",
-    mo_ta:"Người thành lập Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu — tổ chức tiền thân của Đảng Cộng sản Việt Nam. Người trực tiếp mở các lớp huấn luyện chính trị, đào tạo cán bộ cách mạng nòng cốt. Tờ báo Thanh Niên ra đời ngày 21/06/1925 — nay là Ngày Báo chí Cách mạng Việt Nam.",
-    y_nghia:"Lần đầu tiên có tổ chức cách mạng có hệ thống, đào tạo cán bộ bài bản — chuẩn bị lực lượng cho sự ra đời của Đảng Cộng sản Việt Nam." },
-
-  { id:7,  nam:"03/02/1930", ngan:"1930", cat:"Sự Nghiệp", noi:"Hương Cảng (Hong Kong)",
-    tieu_de:"Sáng Lập Đảng Cộng Sản Việt Nam",
-    mo_ta:"Ngày 03/02/1930, Người chủ trì Hội nghị hợp nhất ba tổ chức cộng sản (Đông Dương Cộng sản Đảng, An Nam Cộng sản Đảng, Đông Dương Cộng sản Liên đoàn) thành Đảng Cộng sản Việt Nam tại Hương Cảng. Sự ra đời của Đảng chấm dứt thời kỳ khủng hoảng về đường lối và tổ chức lãnh đạo.",
-    y_nghia:"Từ đây cách mạng Việt Nam có sự lãnh đạo thống nhất dưới ngọn cờ của Đảng — mở ra con đường đi tới thắng lợi hoàn toàn." },
-
-  { id:8,  nam:"1941",       ngan:"1941", cat:"Sự Nghiệp", noi:"Pác Bó, Cao Bằng",
-    tieu_de:"Trở Về Tổ Quốc — Thành Lập Mặt Trận Việt Minh",
-    mo_ta:"Sau 30 năm bôn ba hải ngoại, Người bí mật trở về Tổ quốc tại Pác Bó, Cao Bằng để trực tiếp lãnh đạo cách mạng. Người thành lập Mặt trận Việt Minh — tổ chức tập hợp toàn bộ lực lượng yêu nước không phân biệt giai cấp, tôn giáo, dân tộc. Từ căn cứ địa Việt Bắc, Người chuẩn bị mọi điều kiện cho Tổng khởi nghĩa.",
-    y_nghia:"Sự trở về lịch sử: Người trực tiếp cầm lái con thuyền cách mạng Việt Nam trong giai đoạn quyết định nhất." },
-
-  { id:9,  nam:"08/1945",    ngan:"1945", cat:"Sự Nghiệp", noi:"Cả nước",
-    tieu_de:"Cách Mạng Tháng Tám Thành Công",
-    mo_ta:"Nắm bắt thời cơ khi Nhật đầu hàng Đồng Minh, Người lãnh đạo Tổng khởi nghĩa Tháng Tám thắng lợi trên cả nước trong vòng 2 tuần (14–28/8/1945), lật đổ hoàn toàn ách thống trị của thực dân phong kiến sau gần 100 năm đô hộ. Đây là cuộc cách mạng 'long trời lở đất' do toàn thể nhân dân thực hiện.",
-    y_nghia:"Một trong những cuộc cách mạng thành công nhanh nhất và ít đổ máu nhất trong lịch sử thế giới hiện đại." },
-
-  { id:10, nam:"02/09/1945", ngan:"2/9/1945", cat:"Di Sản",    noi:"Quảng trường Ba Đình, Hà Nội",
-    tieu_de:"Khai Sinh Nước Việt Nam Dân Chủ Cộng Hòa",
-    mo_ta:"Tại Quảng trường Ba Đình lịch sử, Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt Nam Dân chủ Cộng hòa — nhà nước công nông đầu tiên ở Đông Nam Á. Tuyên ngôn khẳng định quyền bình đẳng, quyền sống, quyền tự do và quyền mưu cầu hạnh phúc là thiêng liêng bất khả xâm phạm.",
-    y_nghia:"Ngày độc lập thiêng liêng của dân tộc Việt Nam sau gần một thế kỷ dưới ách đô hộ của thực dân Pháp." },
-
-  { id:11, nam:"19/12/1946", ngan:"1946", cat:"Sự Nghiệp", noi:"Hà Nội",
-    tieu_de:"Toàn Quốc Kháng Chiến — Lời Kêu Gọi Lịch Sử",
-    mo_ta:"Được bầu làm Chủ tịch nước đầu tiên của Việt Nam Dân chủ Cộng hòa. Trước dã tâm tái xâm lược của thực dân Pháp, ngày 19/12/1946 Người ra Lời kêu gọi Toàn quốc kháng chiến lịch sử: 'Thà hy sinh tất cả, chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ.' Toàn dân tộc bước vào cuộc kháng chiến trường kỳ 9 năm.",
-    y_nghia:"Ý chí bất khuất của cả dân tộc được khơi dậy — cuộc kháng chiến 9 năm chống thực dân Pháp chính thức bắt đầu." },
-
-  { id:12, nam:"07/05/1954", ngan:"1954", cat:"Sự Nghiệp", noi:"Điện Biên Phủ",
-    tieu_de:"Chiến Thắng Điện Biên Phủ — Hiệp Định Giơnevơ",
-    mo_ta:"Dưới sự lãnh đạo tài tình của Chủ tịch Hồ Chí Minh và Đại tướng Võ Nguyên Giáp, quân và dân ta đập tan tập đoàn cứ điểm Điện Biên Phủ ngày 07/05/1954. Chiến thắng 'lừng lẫy năm châu, chấn động địa cầu' buộc Pháp ký Hiệp định Giơnevơ. Miền Bắc hoàn toàn giải phóng.",
-    y_nghia:"Chiến thắng đầu tiên của một nước thuộc địa đánh bại một cường quốc thực dân phương Tây trong thế kỷ XX." },
-
-  { id:13, nam:"1965",       ngan:"1965", cat:"Sự Nghiệp", noi:"Hà Nội",
-    tieu_de:"Lãnh Đạo Kháng Chiến Chống Mỹ",
-    mo_ta:"Khi đế quốc Mỹ leo thang chiến tranh xâm lược, Người khẳng định chân lý lịch sử bất hủ: 'Không có gì quý hơn độc lập, tự do.' Câu nói này trở thành lời hiệu triệu cả dân tộc vừa sản xuất vừa chiến đấu, kiên định mục tiêu thống nhất đất nước cho đến thắng lợi cuối cùng.",
-    y_nghia:"Tư tưởng bất diệt 'Không có gì quý hơn độc lập, tự do' trở thành ngọn đuốc soi đường cho dân tộc Việt Nam và các dân tộc bị áp bức trên thế giới." },
-
-  { id:14, nam:"02/09/1969", ngan:"1969", cat:"Di Sản",    noi:"Hà Nội",
-    tieu_de:"Người Ra Đi — Di Chúc Thiêng Liêng Để Lại",
-    mo_ta:"Ngày 02/09/1969, Chủ tịch Hồ Chí Minh vĩnh biệt chúng ta, để lại muôn vàn thương tiếc cho toàn Đảng, toàn dân, toàn quân và bạn bè quốc tế. Di chúc thiêng liêng Người để lại là tài sản vô giá, kim chỉ nam soi đường cho Đảng và nhân dân. UNESCO vinh danh Người là 'Anh hùng giải phóng dân tộc và Nhà văn hóa kiệt xuất của Việt Nam'.",
-    y_nghia:"Tên Người sống mãi trong lịch sử dân tộc Việt Nam và nhân loại tiến bộ. Di sản tư tưởng của Người tiếp tục soi sáng con đường đi lên của đất nước." },
+  { id:1, nam:"19/05/1890", ngan:"1890", cat:"Cuộc Đời", noi:"Kim Liên, Nam Đàn, Nghệ An", tieu_de:"Sinh tại Kim Liên, Nghệ An", mo_ta:"Chủ tịch Hồ Chí Minh sinh ra ngày 19/05/1890 tại làng Kim Liên, huyện Nam Đàn, tỉnh Nghệ An với tên khai sinh Nguyễn Sinh Cung.", y_nghia:"Quê hương và gia đình là nền tảng đầu tiên hun đúc tâm hồn và ý chí yêu nước trong Người.", anh:"https://dsvh.gov.vn/ckfinder/userfiles/images/Thong%20tin%20ds/DTQGDB_Khu%20di%20tich%20Kim%20Lien.jpg" },
+  { id:2, nam:"05/06/1911", ngan:"1911", cat:"Sự Nghiệp", noi:"Bến cảng Nhà Rồng, Sài Gòn", tieu_de:"Rời Bến Cảng Nhà Rồng Ra Đi Tìm Đường Cứu Nước", mo_ta:"Ngày 05/06/1911, với tên Văn Ba, Người rời bến cảng Nhà Rồng ra đi tìm đường cứu nước trên con tàu Amiral Latouche Tréville.", y_nghia:"Quyết định lịch sử: Người chọn trực tiếp đến các nước phương Tây để tìm hiểu và học hỏi chân lý.", anh:"https://imgchinhsachcuocsong.vnanet.vn/MediaUpload/Org/2024/06/04/104122-4.jpg" },
+  { id:3, nam:"1917", ngan:"1917", cat:"Sự Nghiệp", noi:"Paris, Pháp", tieu_de:"Hoạt Động Cách Mạng Tại Pháp — Nguyễn Ái Quốc", mo_ta:"Trở lại Pháp và lấy tên Nguyễn Ái Quốc, Người tích cực tham gia phong trào công nhân Pháp, viết báo tố cáo tội ác thực dân.", y_nghia:"Cái tên Nguyễn Ái Quốc lần đầu xuất hiện trên trường quốc tế.", anh:"https://media.vov.vn/sites/default/files/styles/large/public/2021-06/nguyen_ai_quoc_tai_dai_hoi_dcs_phap_o_tours_2.jpg" },
+  { id:4, nam:"12/1920", ngan:"1920", cat:"Tư Tưởng", noi:"Tours, Pháp", tieu_de:"Đọc Luận Cương Của Lênin — Tìm Ra Con Đường Cứu Nước", mo_ta:"Khi đọc Sơ thảo luận cương về vấn đề dân tộc và thuộc địa của V.I. Lênin, Người xúc động đến rơi nước mắt. Tại Đại hội Tours, Người bỏ phiếu tán thành gia nhập Quốc tế Cộng sản.", y_nghia:"Bước ngoặt quyết định: từ chủ nghĩa yêu nước đến chủ nghĩa cộng sản.", anh:"https://images.hcmcpv.org.vn/res/news/2021/07/06-07-2021-nguyen-ai-quoc-den-voi-luan-cuong-cua-lenin-buoc-ngoat-cua-cac-mang-viet-nam-C0F693EF-details.jpg?vs=06072021012844" },
+  { id:5, nam:"1921", ngan:"1921", cat:"Tư Tưởng", noi:"Paris, Pháp", tieu_de:"Thành Lập Hội Liên Hiệp Thuộc Địa & Viết «Bản Án Chế Độ Thực Dân Pháp»", mo_ta:"Người tham gia thành lập Hội Liên hiệp các dân tộc thuộc địa và viết tác phẩm nổi tiếng 'Bản án chế độ thực dân Pháp'.", y_nghia:"Tác phẩm lý luận đầu tiên có tầm ảnh hưởng quốc tế.", anh:"https://a.tcnnld.vn//Images/images/collage8654236416895987.jpg" },
+  { id:6, nam:"1925", ngan:"1925", cat:"Sự Nghiệp", noi:"Quảng Châu, Trung Quốc", tieu_de:"Thành Lập Hội Việt Nam Cách Mạng Thanh Niên", mo_ta:"Người thành lập Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu — tổ chức tiền thân của Đảng Cộng sản Việt Nam.", y_nghia:"Lần đầu tiên có tổ chức cách mạng có hệ thống, đào tạo cán bộ bài bản.", anh:"https://quocphongthudo.vn/upload/2001606/fck/files/dsc_6651_ftqq_20200826073940.jpg" },
+  { id:7, nam:"03/02/1930", ngan:"1930", cat:"Sự Nghiệp", noi:"Hương Cảng (Hong Kong)", tieu_de:"Sáng Lập Đảng Cộng Sản Việt Nam", mo_ta:"Ngày 03/02/1930, Người chủ trì Hội nghị hợp nhất ba tổ chức cộng sản thành Đảng Cộng sản Việt Nam.", y_nghia:"Từ đây cách mạng Việt Nam có sự lãnh đạo thống nhất dưới ngọn cờ của Đảng.", anh:"https://file3.qdnd.vn/data/images/0/2022/01/27/huuduong_tv/ngay%20nay%20nam%20xua%203-2%2002.jpg?dpi=150&quality=100&w=870" },
+  { id:8, nam:"1941", ngan:"1941", cat:"Sự Nghiệp", noi:"Pác Bó, Cao Bằng", tieu_de:"Trở Về Tổ Quốc — Thành Lập Mặt Trận Việt Minh", mo_ta:"Sau 30 năm bôn ba hải ngoại, Người bí mật trở về Tổ quốc tại Pác Bó và thành lập Mặt trận Việt Minh.", y_nghia:"Sự trở về lịch sử: Người trực tiếp cầm lái con thuyền cách mạng trong giai đoạn quyết định nhất.", anh:"https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/01/28/1769583795612_bac-ho1.jpeg" },
+  { id:9, nam:"08/1945", ngan:"1945", cat:"Sự Nghiệp", noi:"Cả nước", tieu_de:"Cách Mạng Tháng Tám Thành Công", mo_ta:"Người lãnh đạo Tổng khởi nghĩa Tháng Tám thắng lợi trên cả nước trong vòng 2 tuần, lật đổ hoàn toàn ách thống trị của thực dân phong kiến.", y_nghia:"Một trong những cuộc cách mạng thành công nhanh nhất và ít đổ máu nhất trong lịch sử thế giới hiện đại.", anh:"https://file3.qdnd.vn/data/images/0/2022/07/25/huyentrang_km/3.jpg?dpi=150&quality=100&w=870" },
+  { id:10, nam:"02/09/1945", ngan:"2/9/45", cat:"Di Sản", noi:"Quảng trường Ba Đình, Hà Nội", tieu_de:"Khai Sinh Nước Việt Nam Dân Chủ Cộng Hòa", mo_ta:"Tại Quảng trường Ba Đình lịch sử, Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt Nam Dân chủ Cộng hòa.", y_nghia:"Ngày độc lập thiêng liêng của dân tộc Việt Nam sau gần một thế kỷ dưới ách đô hộ.", anh:"https://cdn2.baodongthap.vn/image/news/2022/20220901/fckimage/images1755879-3.jpg" },
+  { id:11, nam:"19/12/1946", ngan:"1946", cat:"Sự Nghiệp", noi:"Hà Nội", tieu_de:"Toàn Quốc Kháng Chiến — Lời Kêu Gọi Lịch Sử", mo_ta:"Ngày 19/12/1946 Người ra Lời kêu gọi Toàn quốc kháng chiến lịch sử: 'Thà hy sinh tất cả, chứ nhất định không chịu mất nước'.", y_nghia:"Ý chí bất khuất của cả dân tộc được khơi dậy — cuộc kháng chiến 9 năm chính thức bắt đầu.", anh:"https://upload.wikimedia.org/wikipedia/vi/f/f2/Toanquockhangchien.jpg" },
+  { id:12, nam:"07/05/1954", ngan:"1954", cat:"Sự Nghiệp", noi:"Điện Biên Phủ", tieu_de:"Chiến Thắng Điện Biên Phủ — Hiệp Định Giơnevơ", mo_ta:"Quân và dân ta đập tan tập đoàn cứ điểm Điện Biên Phủ ngày 07/05/1954, buộc Pháp ký Hiệp định Giơnevơ.", y_nghia:"Chiến thắng đầu tiên của một nước thuộc địa đánh bại một cường quốc thực dân phương Tây trong thế kỷ XX.", anh:"https://file3.qdnd.vn/data/images/0/2022/04/23/tvtuongvy/chien%20thang%20dien%20bien%20phu.jpg?dpi=150&quality=100&w=870" },
+  { id:13, nam:"1965", ngan:"1965", cat:"Sự Nghiệp", noi:"Hà Nội", tieu_de:"Lãnh Đạo Kháng Chiến Chống Mỹ", mo_ta:"Người khẳng định: 'Không có gì quý hơn độc lập, tự do' — lời hiệu triệu cả dân tộc vừa sản xuất vừa chiến đấu.", y_nghia:"Tư tưởng bất diệt trở thành ngọn đuốc soi đường cho dân tộc Việt Nam và các dân tộc bị áp bức.", anh:null },
+  { id:14, nam:"02/09/1969", ngan:"1969", cat:"Di Sản", noi:"Hà Nội", tieu_de:"Người Ra Đi — Di Chúc Thiêng Liêng Để Lại", mo_ta:"Ngày 02/09/1969, Chủ tịch Hồ Chí Minh vĩnh biệt chúng ta, để lại Di chúc thiêng liêng và muôn vàn thương tiếc. UNESCO vinh danh Người là 'Anh hùng giải phóng dân tộc và Nhà văn hóa kiệt xuất'.", y_nghia:"Tên Người sống mãi trong lịch sử dân tộc Việt Nam và nhân loại tiến bộ.", anh:"https://hochiminh.vn/upload/3000001/20251024/55a1e40c284f43681f51be8cef15b7cd20150416_101747_lanh-dao-ben-linh-cuu-cua-Bac-Ho-9-9-1969.jpg", link_di_chuc:"https://baochinhphu.vn/toan-van-di-chuc-cua-chu-tich-ho-chi-minh-102169104.htm" }
 ];
 
-/* 3. TÁC PHẨM (10 tác phẩm — đã bổ sung 4 tác phẩm còn thiếu) */
 const DATA_TAC_PHAM = [
-  { id:1,  ten:"Búp Sen Xanh",                              tac_gia:"Nhà văn Sơn Tùng",    the_loai:"Khác",       nam:1982, bieu_tuong:"📗",
-    mo_ta:"Cuốn tiểu thuyết lịch sử nổi tiếng nhất của nhà văn Sơn Tùng, xuất bản lần đầu năm 1982. Bức tranh chân thực, đầy xúc động về thời niên thiếu và hành trình ra đi tìm đường cứu nước của Chủ tịch Hồ Chí Minh. Đã tái bản hơn 30 lần và dịch ra nhiều ngôn ngữ trên thế giới." },
-  { id:2,  ten:"Nhật Ký Trong Tù",                          tac_gia:"Hồ Chí Minh",         the_loai:"Nhật Ký",    nam:1943, bieu_tuong:"📜",
-    mo_ta:"Tập thơ chữ Hán gồm 133 bài, sáng tác trong thời gian bị giam cầm tại các nhà tù của Tưởng Giới Thạch ở Quảng Tây (1942–1943). Thể hiện tinh thần lạc quan cách mạng, ý chí kiên cường và tâm hồn nghệ sĩ của Người trong hoàn cảnh lao tù cực khổ." },
-  { id:3,  ten:"Bản Án Chế Độ Thực Dân Pháp",              tac_gia:"Nguyễn Ái Quốc",      the_loai:"Văn Xuôi",   nam:1925, bieu_tuong:"📖",
-    mo_ta:"Tác phẩm lý luận đầu tiên của Người, xuất bản năm 1925 tại Paris. Lên án mạnh mẽ sự tàn bạo của chủ nghĩa thực dân, thức tỉnh lòng yêu nước của nhân dân các nước thuộc địa. Một trong những văn kiện quan trọng nhất của phong trào giải phóng dân tộc Việt Nam." },
-  { id:4,  ten:"Đường Kách Mệnh",                           tac_gia:"Nguyễn Ái Quốc",      the_loai:"Văn Xuôi",   nam:1927, bieu_tuong:"📕",
-    mo_ta:"Tập hợp các bài giảng tại các lớp huấn luyện cán bộ ở Quảng Châu (1925–1927). Tác phẩm lý luận quan trọng đặt nền tảng tư tưởng và đường lối cho cách mạng Việt Nam. Đây là sách giáo khoa đầu tiên về lý luận cách mạng cho cán bộ Việt Nam." },
-  { id:5,  ten:"Tuyên Ngôn Độc Lập",                        tac_gia:"Hồ Chí Minh",         the_loai:"Diễn Văn",   nam:1945, bieu_tuong:"📃",
-    mo_ta:"Văn kiện lịch sử được Chủ tịch Hồ Chí Minh đọc tại Quảng trường Ba Đình ngày 02/09/1945, khai sinh nước Việt Nam Dân chủ Cộng hòa. Khẳng định quyền tự do, độc lập là quyền thiêng liêng bất khả xâm phạm của mọi dân tộc." },
-  { id:6,  ten:"Những Trò Lố hay là Va-ren và Phan Bội Châu", tac_gia:"Nguyễn Ái Quốc",    the_loai:"Truyện Ngắn", nam:1925, bieu_tuong:"✍️",
-    mo_ta:"Truyện ngắn nổi tiếng viết bằng tiếng Pháp, vạch trần bộ mặt giả dối của toàn quyền Va-ren và tô đậm khí phách hiên ngang bất khuất của nhà yêu nước Phan Bội Châu. Đăng trên báo Người Cùng Khổ năm 1925, là mẫu mực về nghệ thuật trào phúng chính trị." },
-  { id:7,  ten:"Lịch Sử Nước Ta",                           tac_gia:"Hồ Chí Minh",         the_loai:"Thơ Ca",     nam:1942, bieu_tuong:"📿",
-    mo_ta:"Tác phẩm lịch sử bằng thơ gồm 208 câu lục bát, viết năm 1942 nhằm giáo dục tinh thần yêu nước và truyền thống lịch sử cho cán bộ, nhân dân. Đây là cuốn sách giáo khoa lịch sử bằng thơ đầu tiên của nước ta, dễ nhớ và dễ học." },
-  { id:8,  ten:"Sửa Đổi Lối Làm Việc",                      tac_gia:"Hồ Chí Minh",         the_loai:"Văn Xuôi",   nam:1947, bieu_tuong:"📝",
-    mo_ta:"Tác phẩm lý luận quan trọng về xây dựng Đảng, đạo đức cán bộ và lối làm việc có khoa học. Viết năm 1947 dưới bút danh X.Y.Z, đây là cẩm nang về tư cách người cán bộ cách mạng, mang giá trị thực tiễn sâu sắc đến ngày nay." },
-  { id:9,  ten:"Cảnh Khuya & Rằm Tháng Giêng",              tac_gia:"Hồ Chí Minh",         the_loai:"Thơ Ca",     nam:1947, bieu_tuong:"🌙",
-    mo_ta:"Hai bài thơ tứ tuyệt nổi tiếng viết tại Việt Bắc năm 1947. Bức tranh thiên nhiên núi rừng Việt Bắc hòa quyện với hình ảnh người chiến sĩ – thi sĩ – lãnh tụ luôn trăn trở lo nghĩ việc nước trong những đêm kháng chiến gian khổ." },
-  { id:10, ten:"Di Chúc",                                    tac_gia:"Hồ Chí Minh",         the_loai:"Khác",       nam:1969, bieu_tuong:"📄",
-    mo_ta:"Di chúc thiêng liêng Chủ tịch Hồ Chí Minh để lại trước khi qua đời. Bản Di chúc viết từ năm 1965, hoàn chỉnh năm 1969 — là tài sản vô giá, kim chỉ nam soi đường cho Đảng và nhân dân trong sự nghiệp xây dựng và bảo vệ Tổ quốc." },
+  { id:1, ten:"Búp Sen Xanh", tac_gia:"Nhà văn Sơn Tùng", the_loai:"Văn Xuôi", nam:1982, anh_bia:"https://cdn1.fahasa.com/media/catalog/product/8/9/8935244826487.jpg", bieu_tuong:"📗", mo_ta:"Tác phẩm tiểu thuyết lịch sử nổi tiếng nhất viết về thời niên thiếu và hành trình hình thành nhân cách, chí hướng cứu nước của Chủ tịch Hồ Chí Minh. Cuốn sách khắc họa chân thực bối cảnh nước nhà lịch sử, tình cảm gia đình, quê hương xứ Nghệ và bước chân bôn ba đầy vĩ đại của Bác từ lúc ấu thơ cho đến khi rời Bến cảng Nhà Rồng năm 1911.", link_online:"https://dilib.vn/pdf/viewer.php?id=d422d2" },
+  { id:2, ten:"Thầy giáo Nguyễn Tất Thành ở trường Dục Thanh", tac_gia:"Nhà văn Sơn Tùng", the_loai:"Văn Xuôi", nam:2016, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho%20(1).jpg", bieu_tuong:"📘", mo_ta:"Tác phẩm được con trai nhà văn sưu tầm từ bản viết tay của cha, tái hiện sinh động quãng thời gian Bác Hồ (khi đó mang tên Nguyễn Tất Thành) rời Huế vào Nam, vượt qua bao đèo dốc gian nan và dừng chân dạy học tại trường Dục Thanh (Phan Thiết) – ngôi trường do các nhân sĩ yêu nước sáng lập." },
+  { id:3, ten:"Cuộc chia li trên Bến Nhà Rồng", tac_gia:"Nhà văn Sơn Tùng", the_loai:"Văn Xuôi", nam:1990, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho2%20(3).jpg", bieu_tuong:"📕", mo_ta:"Được chỉnh sửa từ kịch bản phim nhựa nổi tiếng 'Hẹn gặp lại Sài Gòn', truyện dài này tập trung khắc họa sâu sắc và rõ nét hơn tình cảm cao thượng, đẹp đẽ của cô gái Lê Thị Huệ dành cho chàng thanh niên Nguyễn Tất Thành." },
+  { id:4, ten:"Từ làng Sen", tac_gia:"Nhà văn Sơn Tùng & Họa sĩ Lê Lam", the_loai:"Văn Xuôi", nam:1990, anh_bia:"https://cdn1.fahasa.com/media/catalog/product/8/9/8935244872606.jpg", bieu_tuong:"📙", mo_ta:"Ấn phẩm sách tranh đặc biệt ra đời nhân dịp kỷ niệm 100 năm ngày sinh của Bác. Sự kết hợp giữa lời kể ngắn gọn, súc tích và 25 bức tranh minh họa màu nước ấm áp giúp các độc giả thiếu nhi dễ dàng tiếp cận, hiểu thêm về thuở ấu thơ của vị lãnh tụ kính yêu." },
+  { id:5, ten:"Cha và Con", tac_gia:"Nhà văn Hồ Phương", the_loai:"Văn Xuôi", nam:2007, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho2%20(2).jpg", bieu_tuong:"📓", mo_ta:"Cuốn tiểu thuyết tập trung mô tả cuộc sống của cậu thiếu niên Nguyễn Sinh Côn, đặc biệt là trường đoạn xúc động khi anh lên Bình Khê từ giã người cha kính yêu – cụ Phó bảng Nguyễn Sinh Sắc, để dấn thân vào hành trình vĩ đại không hẹn ngày về." },
+  { id:6, ten:"Nhìn ra biển cả", tac_gia:"Biên kịch Nguyễn Thị Hồng Ngát", the_loai:"Văn Xuôi", nam:2010, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho%20(3).jpg", bieu_tuong:"📔", mo_ta:"Tác phẩm kịch bản văn học đi sâu khai thác diễn biến nội tâm đầy hoài bão của thầy giáo trẻ Nguyễn Tất Thành, khắc họa hành trình từ Huế vào Phan Thiết và quyết tâm hướng về phương Nam để 'Nhìn ra biển cả' rộng lớn." },
+  { id:7, ten:"Kể chuyện Bác Hồ", tac_gia:"Trần Dân Tiên (Sưu tầm)", the_loai:"Văn Xuôi", nam:2021, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho2%20(4).jpg", bieu_tuong:"📒", mo_ta:"Cuốn sách tranh khổ lớn biên soạn dựa theo tác phẩm 'Những mẩu chuyện về đời hoạt động của Hồ Chủ tịch'. Bằng ngôn ngữ ngắn gọn, trực quan, cuốn sách giúp thế hệ trẻ nắm bắt những cột mốc lịch sử suốt hơn 30 năm bôn ba hải ngoại của Bác." },
+  { id:8, ten:"Bác Hồ kính yêu", tac_gia:"Nhiều tác giả", the_loai:"Văn Xuôi", nam:2021, anh_bia:"https://cdn1.fahasa.com/media/catalog/product/i/m/image_189960.jpg", bieu_tuong:"📜", mo_ta:"Tuyển tập những câu chuyện ý nghĩa chọn lọc từ các nguồn sách báo uy tín. Độc giả sẽ được gặp lại những mẩu chuyện xúc động như 'Hai bàn tay', chuyện anh Ba làm phụ bếp, chuyện Bác làm báo 'Người cùng khổ'." },
+  { id:9, ten:"Nhật kí trong tù", tac_gia:"Chủ tịch Hồ Chí Minh", the_loai:"Thơ Ca", nam:1943, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho2%20(5).jpg", bieu_tuong:"❤️", mo_ta:"Tập thơ chữ Hán vô giá gồm những bài thơ Bác viết trong thời gian bị chính quyền Tưởng Giới Thạch bắt giam từ 1942–1943. Đây là kiệt tác văn học phản ánh tâm hồn thanh cao, ý chí thép và tinh thần lạc quan cách mạng của một bậc đại trí, đại dũng." }
 ];
 
-/* 4. HỘI PHỤ NỮ (5 tin tức mẫu — thêm tin tức thật vào đây) */
 const DATA_HOI_PHU_NU = [
-  { id:1,
-    tieu_de:"Hội nghị tổng kết công tác Hội và phong trào phụ nữ năm 2025",
-    the_loai:"Hoạt Động", ngay:"20/12/2025",
-    mo_ta:"Hội Liên hiệp Phụ nữ xã Bầu Lâm tổ chức Hội nghị tổng kết công tác Hội và phong trào phụ nữ năm 2025, đề ra phương hướng nhiệm vụ năm 2026. Nhiều cá nhân và tập thể xuất sắc được biểu dương khen thưởng.", anh:null },
-  { id:2,
-    tieu_de:"Trao học bổng \"Nâng bước em đến trường\" cho con em hội viên",
-    the_loai:"Phong Trào", ngay:"05/09/2025",
-    mo_ta:"Nhân dịp khai giảng năm học mới 2025–2026, Hội Phụ nữ xã Bầu Lâm phối hợp cùng các mạnh thường quân trao 15 suất học bổng cho con em hội viên có hoàn cảnh khó khăn nhưng vươn lên trong học tập.", anh:null },
-  { id:3,
-    tieu_de:"Ra mắt mô hình \"Ngôi nhà xanh không đồng\" tại ấp Suối Lê",
-    the_loai:"Phong Trào", ngay:"15/08/2025",
-    mo_ta:"Chi hội Phụ nữ ấp Suối Lê chính thức ra mắt mô hình \"Ngôi nhà xanh không đồng\", huy động hội viên trồng cây, trồng hoa dọc các tuyến đường, góp phần xây dựng cảnh quan nông thôn mới xanh – sạch – đẹp.", anh:null },
-  { id:4,
-    tieu_de:"Phong trào \"Phụ nữ khởi nghiệp\" — Hỗ trợ vốn phát triển kinh tế gia đình",
-    the_loai:"Phong Trào", ngay:"08/03/2025",
-    mo_ta:"Nhân Ngày Quốc tế Phụ nữ 8/3, Hội Phụ nữ xã Bầu Lâm phát động phong trào \"Phụ nữ khởi nghiệp\", hỗ trợ vốn từ tổ tiết kiệm cho 5 hội viên phát triển mô hình kinh tế, nâng cao thu nhập gia đình.", anh:null },
-  { id:5,
-    tieu_de:"Chiến dịch tổng vệ sinh môi trường — Diệt lăng quăng phòng chống sốt xuất huyết",
-    the_loai:"Hoạt Động", ngay:"18/07/2025",
-    mo_ta:"Hội Phụ nữ xã Bầu Lâm phối hợp Trạm Y tế xã tổ chức chiến dịch tổng vệ sinh môi trường, diệt lăng quăng, phòng chống sốt xuất huyết. Hơn 80 hội viên tham gia, dọn dẹp 15 tuyến đường trong xã.", anh:null },
+  { id:1, tieu_de:"Hội nghị tổng kết công tác Hội và phong trào phụ nữ năm 2025", the_loai:"Hoạt Động", ngay:"20/12/2025", mo_ta:"Hội Liên hiệp Phụ nữ xã Bàu Lâm tổ chức Hội nghị tổng kết công tác Hội và phong trào phụ nữ năm 2025, đề ra phương hướng nhiệm vụ năm 2026." },
+  { id:2, tieu_de:'Trao học bổng "Nâng bước em đến trường" cho con em hội viên', the_loai:"Phong Trào", ngay:"05/09/2025", mo_ta:"Nhân dịp khai giảng năm học mới 2025–2026, Hội Phụ nữ xã Bàu Lâm phối hợp cùng các mạnh thường quân trao 15 suất học bổng cho con em hội viên có hoàn cảnh khó khăn." },
+  { id:3, tieu_de:'Ra mắt mô hình "Ngôi nhà xanh không đồng" tại ấp Suối Lê', the_loai:"Phong Trào", ngay:"15/08/2025", mo_ta:'Chi hội Phụ nữ ấp Suối Lê chính thức ra mắt mô hình "Ngôi nhà xanh không đồng", huy động hội viên trồng cây, trồng hoa dọc các tuyến đường.' },
+  { id:4, tieu_de:'Phong trào "Phụ nữ khởi nghiệp" — Hỗ trợ vốn phát triển kinh tế gia đình', the_loai:"Phong Trào", ngay:"08/03/2025", mo_ta:'Nhân Ngày Quốc tế Phụ nữ 8/3, Hội Phụ nữ xã Bàu Lâm phát động phong trào "Phụ nữ khởi nghiệp", hỗ trợ vốn cho 5 hội viên phát triển mô hình kinh tế.' },
+  { id:5, tieu_de:"Chiến dịch tổng vệ sinh môi trường — Diệt lăng quăng phòng chống sốt xuất huyết", the_loai:"Hoạt Động", ngay:"18/07/2025", mo_ta:"Hội Phụ nữ xã Bàu Lâm phối hợp Trạm Y tế xã tổ chức chiến dịch tổng vệ sinh môi trường, diệt lăng quăng. Hơn 80 hội viên tham gia." },
+  { id:6, tieu_de:'Ra quân trồng hoa và dọn dẹp vệ sinh môi trường hưởng ứng "Thành phố muôn sắc hoa"', the_loai:"Hoạt Động", ngay:"23/5/2026", mo_ta:'Hội LHPN xã cùng Chi bộ, Ban nhân dân ấp 1 ra quân trồng gần 200 cây hoa thiên điểu dọc tuyến đường tổ 12, ấp 1 (chiều dài gần 500m), phát quang bụi rậm và thu gom rác thải. Mục tiêu: cảnh quan "sáng – xanh – sạch – đẹp", góp phần xây dựng nông thôn mới nâng cao.', link:"https://www.facebook.com/share/p/1D7tQeEvVx/" }
 ];
 
-/* ============================================================
-   CODE GIAO DIỆN
-   ============================================================ */
+/* ============================================================  CONFIG  ============================================================ */
+const PAGES=["trang-chu","guong-sang","hanh-trinh","tac-pham","hoi-phu-nu"];
+const PAGE_LABELS=["Trang Chủ","Gương Sáng","Hành Trình","Tác Phẩm","Hội Phụ Nữ"];
+const catClass={"Cuộc Đời":"cat-cd","Sự Nghiệp":"cat-sn","Tư Tưởng":"cat-tt","Di Sản":"cat-ds"};
+const dotColors={"Cuộc Đời":"#1a4fa0","Sự Nghiệp":"#16a34a","Tư Tưởng":"#7c3aed","Di Sản":"#c8922a"};
 
-const catClass = { "Cuộc Đời":"cat-cd","Sự Nghiệp":"cat-sn","Tư Tưởng":"cat-tt","Di Sản":"cat-ds" };
-const dotColors = { "Cuộc Đời":"#1a4fa0","Sự Nghiệp":"#16a34a","Tư Tưởng":"#7c3aed","Di Sản":"#c8922a" };
-const PAGES = ["trang-chu","guong-sang","hanh-trinh","tac-pham","hoi-phu-nu"];
-const PAGE_LABELS = ["Trang Chủ","Gương Sáng","Hành Trình","Tác Phẩm","Hội Phụ Nữ"];
+/* ============================================================  STATE  ============================================================ */
+let state={page:"trang-chu",modal:null,menuOpen:false,toast:null,toastTimer:null,imgErrors:{}};
+function setState(p){Object.assign(state,p);render();}
+function goTo(p){setState({page:p,menuOpen:false});window.scrollTo({top:0,behavior:"smooth"});}
+function openModal(i){setState({modal:i});}function closeModal(){setState({modal:null});}
+function showToast(m){if(state.toastTimer)clearTimeout(state.toastTimer);const t=setTimeout(()=>setState({toast:null,toastTimer:null}),3000);setState({toast:m,toastTimer:t});}
+function markImgError(k){const e=Object.assign({},state.imgErrors);e[k]=true;setState({imgErrors:e});}
 
-/* Modal */
-function Modal({ item, onClose }) {
-  if (!item) return null;
-  return (
-    <div className="modal-overlay" onClick={e => e.target===e.currentTarget && onClose()}>
-      <div className="modal-box">
-        <button className="modal-close" onClick={onClose}>✕</button>
-        {item._type==="guong" && (
-          <>
-            {item.anh
-              ? <img src={item.anh} alt={item.ten} style={{width:80,height:80,borderRadius:"50%",objectFit:"cover",objectPosition:"top",marginBottom:16,border:"3px solid #e0ddd5"}} onError={e=>e.target.style.display='none'}/>
-              : <div style={{fontSize:56,marginBottom:16}}>👩</div>}
-            <div className="modal-name">{item.ten}</div>
-            <div className="modal-role">{item.chuc_danh}</div>
-            <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:16}}>
-              <span className="tag">{item.loai}</span>
-              <span className="tag tag-gold">Năm {item.nam}</span>
-              {item.noi_bat && <span className="tag" style={{background:"#fef3c7",color:"#92400e"}}>⭐ Nổi bật</span>}
-            </div>
-            <div className="modal-section">
-              <div className="modal-section-label">Giới thiệu</div>
-              <div className="modal-text">{item.mo_ta}</div>
-            </div>
-            {item.chi_tiet && (
-              <div className="modal-section">
-                <div className="modal-section-label">Chi tiết thành tích</div>
-                <div className="modal-text">{item.chi_tiet}</div>
-              </div>
-            )}
-            <div className="modal-scroll-hint">↕ Cuộn để xem thêm</div>
-          </>
-        )}
-        {item._type==="tacpham" && (
-          <>
-            <div style={{fontSize:56,marginBottom:16}}>{item.bieu_tuong}</div>
-            <div className="modal-name">{item.ten}</div>
-            <div className="modal-role">— {item.tac_gia} · {item.nam}</div>
-            <div style={{marginBottom:16}}><span className="tag">{item.the_loai}</span></div>
-            <div className="modal-section">
-              <div className="modal-text">{item.mo_ta}</div>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
+/* ============================================================  HELPERS  ============================================================ */
+function el(tag,props,...ch){
+  const e=document.createElement(tag);
+  if(props)Object.entries(props).forEach(([k,v])=>{
+    if(k==="className")e.className=v;
+    else if(k==="style"&&typeof v==="object")Object.assign(e.style,v);
+    else if(k.startsWith("on")&&typeof v==="function")e.addEventListener(k.slice(2).toLowerCase(),v);
+    else e.setAttribute(k,v);
+  });
+  ch.flat(Infinity).forEach(c=>{if(c==null||c===false)return;e.appendChild(typeof c==="string"?document.createTextNode(c):c);});
+  return e;
+}
+function div(cls,...ch){return el("div",{className:cls},...ch);}
+function span(cls,txt){const s=el("span",{className:cls});s.textContent=txt;return s;}
+function btn(cls,label,onclick){const b=el("button",{className:cls,onClick:onclick});b.textContent=label;return b;}
+
+/* ============================================================  MODAL  ============================================================ */
+function renderModal(){
+  const item=state.modal;if(!item)return null;
+  const overlay=div("modal-overlay");
+  overlay.addEventListener("click",e=>{if(e.target===overlay)closeModal();});
+  const box=div("modal-box");
+  const closeBtn=el("button",{className:"modal-close",onClick:closeModal});closeBtn.textContent="✕";box.appendChild(closeBtn);
+
+  if(item._type==="guong"){
+    const hasImg=item.anh&&!state.imgErrors["guong_"+item.id];
+    if(hasImg){
+      const img=el("img",{src:item.anh,alt:item.ten,style:{width:"90px",height:"90px",borderRadius:"50%",objectFit:"cover",objectPosition:"top",marginBottom:"16px",border:"3px solid var(--border)"}});
+      img.onerror=()=>markImgError("guong_"+item.id);box.appendChild(img);
+    } else {
+      const emo=div(""); emo.style.cssText="font-size:56px;margin-bottom:16px"; emo.textContent="👤"; box.appendChild(emo);
+    }
+    const name=div("modal-name");name.textContent=item.ten;box.appendChild(name);
+    const role=div("modal-role");role.textContent=item.chuc_danh;box.appendChild(role);
+    const tags=div("card-tags");
+    tags.appendChild(span("tag",item.loai));
+    tags.appendChild(span("tag tag-gold","Năm "+item.nam));
+    box.appendChild(tags);
+    const sec1=div("modal-section");
+    const l1=div("modal-section-label");l1.textContent="Giới thiệu";sec1.appendChild(l1);
+    const p1=div("modal-text");p1.textContent=item.mo_ta;sec1.appendChild(p1);box.appendChild(sec1);
+    if(item.chi_tiet){
+      const sec2=div("modal-section");
+      const l2=div("modal-section-label");l2.textContent="Chi tiết thành tích";sec2.appendChild(l2);
+      const p2=div("modal-text");p2.textContent=item.chi_tiet;sec2.appendChild(p2);box.appendChild(sec2);
+    }
+    if(item.bai_bao){
+      const secBb=div("modal-section");secBb.style.marginTop="24px";
+      const a=el("a",{href:item.bai_bao,target:"_blank",className:"btn-primary",style:"display:flex;justify-content:center;width:100%;"});
+      a.textContent="📰 Đọc bài báo về ông Lê Đình Dũng";secBb.appendChild(a);box.appendChild(secBb);
+    }
+  } else if(item._type==="tacpham"){
+    const hasImg=item.anh_bia&&!state.imgErrors["tp_"+item.id];
+    if(hasImg){
+      const img=el("img",{src:item.anh_bia,alt:item.ten,style:{width:"120px",borderRadius:"8px",marginBottom:"16px",boxShadow:"0 4px 16px rgba(0,0,0,.15)"}});
+      img.onerror=()=>markImgError("tp_"+item.id);box.appendChild(img);
+    } else {
+      const emo=div("");emo.style.cssText="font-size:56px;margin-bottom:16px";emo.textContent=item.bieu_tuong||"📖";box.appendChild(emo);
+    }
+    const name=div("modal-name");name.textContent=item.ten;box.appendChild(name);
+    const role=div("modal-role");role.textContent="— "+item.tac_gia+" · "+item.nam;box.appendChild(role);
+    const tags=div("card-tags");tags.appendChild(span("tag",item.the_loai));box.appendChild(tags);
+    const sec=div("modal-section");const p=div("modal-text");p.textContent=item.mo_ta;sec.appendChild(p);box.appendChild(sec);
+    if(item.link_online){
+      const secL=div("modal-section");secL.style.marginTop="24px";
+      const a=el("a",{href:item.link_online,target:"_blank",className:"btn-primary",style:"display:flex;justify-content:center;width:100%;"});
+      a.textContent="📖 Đọc Sách Trực Tuyến (Bản PDF)";secL.appendChild(a);box.appendChild(secL);
+    }
+  }
+  overlay.appendChild(box);return overlay;
 }
 
-/* Timeline zigzag preview */
-function TimelinePreview({ onViewAll }) {
-  const pts = DATA_HANH_TRINH.slice(0, 10);
-  const W=900, PAD=50;
-  const step = (W-PAD*2)/(pts.length-1);
-  const ys = [65,120,60,125,60,120,65,120,65,120];
-  const polyline = pts.map((_,i) => `${PAD+i*step},${ys[i]}`).join(" ");
-  return (
-    <div className="timeline-preview">
-      <svg viewBox="0 0 900 200" style={{minWidth:900,width:"100%",display:"block",height:200}}>
-        <polyline points={polyline} fill="none" stroke="#1a4fa0" strokeWidth="1.5" strokeDasharray="6 4" opacity=".4"/>
-        {pts.map((p,i) => {
-          const x=PAD+i*step, y=ys[i], top=y<100;
-          const dc = dotColors[p.cat]||"#1a4fa0";
-          return (
-            <g key={p.id} style={{cursor:"pointer"}} onClick={onViewAll}>
-              <circle cx={x} cy={y} r={8} fill={dc} stroke="#fff" strokeWidth={2}/>
-              <circle cx={x} cy={y} r={12} fill="none" stroke={dc} strokeWidth={1} opacity={.3}/>
-              <text x={x} y={top?y-18:y+22} textAnchor="middle" fontSize={11} fontWeight="700" fill="#1a4fa0" fontFamily="'Be Vietnam Pro',sans-serif">{p.ngan}</text>
-              <text x={x} y={top?y-30:y+34} textAnchor="middle" fontSize={9} fill="#6b6b60" fontFamily="'Be Vietnam Pro',sans-serif">
-                {p.tieu_de.length>20?p.tieu_de.slice(0,18)+"…":p.tieu_de}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-    </div>
-  );
+/* ============================================================  CARDS  ============================================================ */
+function renderGuongCard(item){
+  const card=div("card");
+  card.addEventListener("click",()=>openModal({...item,_type:"guong"}));
+  const imgW=div("card-img");
+  const hasImg=item.anh&&!state.imgErrors["guong_"+item.id];
+  if(hasImg){
+    const img=el("img",{src:item.anh,alt:item.ten});img.style.objectPosition="top";
+    img.onerror=()=>markImgError("guong_"+item.id);imgW.appendChild(img);
+  } else { imgW.textContent="👤";imgW.style.fontSize="56px"; }
+  if(item.noi_bat){const b=div("badge-hot");b.textContent="⭐ Nổi bật";imgW.appendChild(b);}
+  card.appendChild(imgW);
+  const body=div("card-body");
+  const tags=div("card-tags");
+  tags.appendChild(span("tag",item.loai));
+  tags.appendChild(span("card-year","Năm "+item.nam));
+  body.appendChild(tags);
+  const name=div("card-name");name.textContent=item.ten;body.appendChild(name);
+  const role=div("card-role");role.textContent=item.chuc_danh.split("\n")[0];body.appendChild(role);
+  const desc=div("card-desc");desc.textContent=item.mo_ta;body.appendChild(desc);
+  const lnk=div("card-link");lnk.innerHTML='Xem chi tiết <span class="card-link-arrow">→</span>';body.appendChild(lnk);
+  card.appendChild(body);return card;
 }
 
-/* FIXED: Gương Sáng Card dùng useState để xử lý ảnh lỗi */
-function GuongCard({ item, onClick }) {
-  const [imgErr, setImgErr] = useState(false);
-  return (
-    <div className="card" onClick={() => onClick({...item,_type:"guong"})}>
-      <div className="card-img">
-        {item.anh && !imgErr
-          ? <img src={item.anh} alt={item.ten} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"top"}} onError={()=>setImgErr(true)}/>
-          : <span style={{fontSize:56}}>👩</span>}
-        {item.noi_bat && <div className="badge-hot">⭐ Nổi bật</div>}
-      </div>
-      <div className="card-body">
-        <div className="card-tags">
-          <span className="tag">{item.loai}</span>
-          <span className="card-year">Năm {item.nam}</span>
-        </div>
-        <div className="card-name">{item.ten}</div>
-        <div className="card-role">{item.chuc_danh.split("\n")[0]}</div>
-        <div className="card-desc">{item.mo_ta}</div>
-        <div className="card-link">Xem chi tiết <span className="card-link-arrow">→</span></div>
-      </div>
-    </div>
-  );
+function renderTacPhamCard(item){
+  const card=div("tp-card");
+  card.addEventListener("click",e=>{if(e.target.closest(".read-online-btn"))return;openModal({...item,_type:"tacpham"});});
+  const cover=div("tp-cover");
+  const hasImg=item.anh_bia&&!state.imgErrors["tp_"+item.id];
+  if(hasImg){
+    cover.style.padding="0";
+    const img=el("img",{src:item.anh_bia,alt:item.ten});
+    img.onerror=()=>markImgError("tp_"+item.id);cover.appendChild(img);
+  } else { cover.textContent=item.bieu_tuong||"📖"; }
+  card.appendChild(cover);
+  const body=div("tp-body");
+  const tags=div("card-tags");tags.appendChild(span("tag",item.the_loai));tags.appendChild(span("card-year",String(item.nam)));body.appendChild(tags);
+  const name=div("card-name");name.textContent=item.ten;body.appendChild(name);
+  const role=div("card-role");role.textContent="— "+item.tac_gia;body.appendChild(role);
+  const desc=div("card-desc");desc.textContent=item.mo_ta;body.appendChild(desc);
+  const lnkFlex=div("");lnkFlex.style.cssText="display:flex;justify-content:space-between;align-items:center;margin-top:14px";
+  const lnk=div("card-link");lnk.innerHTML='Xem chi tiết <span class="card-link-arrow">→</span>';lnkFlex.appendChild(lnk);
+  if(item.link_online){
+    const onBtn=el("a",{href:item.link_online,target:"_blank",className:"read-online-btn",style:"font-size:12px;background:rgba(26,79,160,.1);color:var(--primary);padding:4px 10px;border-radius:6px;font-weight:600;"});
+    onBtn.textContent="📖 Đọc online";lnkFlex.appendChild(onBtn);
+  }
+  body.appendChild(lnkFlex);card.appendChild(body);return card;
 }
 
-/* FIXED: VTItem — sửa key dotColors và mobile layout */
-function VTItem({ item, idx }) {
-  const isLeft = idx%2===0;
-  const dc = dotColors[item.cat]||"#1a4fa0";
-  const card = (
-    <div className="vt-card">
-      <div className="vt-year">{item.nam}</div>
-      <span className={`vt-cat-badge ${catClass[item.cat]||"cat-sn"}`}>{item.cat}</span>
-      <div className="vt-place">📍 {item.noi}</div>
-      <div className="vt-title">{item.tieu_de}</div>
-      <div className="vt-desc">{item.mo_ta}</div>
-      <div className="vt-note">{item.y_nghia}</div>
-    </div>
-  );
-  return (
-    <div className="vt-row">
-      <div className="vt-left">{isLeft?card:null}</div>
-      <div className="vt-center">
-        <div className="vt-dot" style={{background:dc,boxShadow:`0 0 0 3px ${dc}33`}}/>
-      </div>
-      <div className="vt-right">{!isLeft?card:null}</div>
-    </div>
-  );
+/* ============================================================  TIMELINE  ============================================================ */
+function renderVTItem(item,idx){
+  const isLeft=idx%2===0;
+  const dc=dotColors[item.cat]||"#1a4fa0";
+  const vCard=div("vt-card");
+
+  // Image
+  const hasImg=item.anh&&!state.imgErrors["ht_"+item.id];
+  if(hasImg){
+    const img=el("img",{src:item.anh,alt:item.tieu_de,className:"vt-img"});
+    img.onerror=()=>markImgError("ht_"+item.id);vCard.appendChild(img);
+  }
+
+  const body=div("vt-card-body");
+  const year=div("vt-year");year.textContent=item.nam;body.appendChild(year);
+  const badge=div("vt-cat-badge "+(catClass[item.cat]||"cat-sn"));badge.textContent=item.cat;body.appendChild(badge);
+  const place=div("vt-place");place.textContent="📍 "+item.noi;body.appendChild(place);
+  const title=div("vt-title");title.textContent=item.tieu_de;body.appendChild(title);
+  const desc=div("vt-desc");desc.textContent=item.mo_ta;body.appendChild(desc);
+  const note=div("vt-note");note.textContent=item.y_nghia;body.appendChild(note);
+  if(item.link_di_chuc){
+    const lnk=el("a",{href:item.link_di_chuc,target:"_blank",className:"vt-ext-link"});
+    lnk.textContent="📜 Đọc toàn văn Di chúc →";body.appendChild(lnk);
+  }
+  vCard.appendChild(body);
+
+  const row=div("vt-row");
+  const left=div("vt-left");if(isLeft)left.appendChild(vCard);row.appendChild(left);
+  const center=div("vt-center");
+  const dot=div("vt-dot");dot.style.background=dc;dot.style.boxShadow="0 0 0 3px "+dc+"33";
+  center.appendChild(dot);row.appendChild(center);
+  const right=div("vt-right");if(!isLeft)right.appendChild(vCard);row.appendChild(right);
+  return row;
 }
 
-/* Tác Phẩm Card */
-function TacPhamCard({ item, onClick }) {
-  return (
-    <div className="tp-card" onClick={() => onClick({...item,_type:"tacpham"})}>
-      <div className="tp-cover">{item.bieu_tuong}</div>
-      <div className="tp-body">
-        <div className="card-tags">
-          <span className="tag">{item.the_loai}</span>
-          <span className="card-year">{item.nam}</span>
-        </div>
-        <div className="card-name">{item.ten}</div>
-        <div className="card-role">— {item.tac_gia}</div>
-        <div className="card-desc">{item.mo_ta}</div>
-        <div className="card-link">Đọc thêm <span className="card-link-arrow">→</span></div>
-      </div>
-    </div>
-  );
+function renderTimelinePreview(){
+  const pts=DATA_HANH_TRINH.slice(0,10);
+  const W=900,PAD=50;const step=(W-PAD*2)/(pts.length-1);
+  const ys=[65,120,60,125,60,120,65,120,65,120];
+  const svgNS="http://www.w3.org/2000/svg";
+  const svg=document.createElementNS(svgNS,"svg");
+  svg.setAttribute("viewBox","0 0 900 200");svg.style.cssText="min-width:900px;width:100%;display:block;height:200px";
+  const poly=document.createElementNS(svgNS,"polyline");
+  poly.setAttribute("points",pts.map((_,i)=>`${PAD+i*step},${ys[i]}`).join(" "));
+  poly.setAttribute("fill","none");poly.setAttribute("stroke","#1a4fa0");poly.setAttribute("stroke-width","1.5");poly.setAttribute("stroke-dasharray","6 4");poly.setAttribute("opacity",".4");svg.appendChild(poly);
+  pts.forEach((p,i)=>{
+    const x=PAD+i*step,y=ys[i],top=y<100;
+    const dc=dotColors[p.cat]||"#1a4fa0";
+    const g=document.createElementNS(svgNS,"g");g.style.cursor="pointer";
+    g.addEventListener("click",()=>goTo("hanh-trinh"));
+    const c1=document.createElementNS(svgNS,"circle");c1.setAttribute("cx",x);c1.setAttribute("cy",y);c1.setAttribute("r",8);c1.setAttribute("fill",dc);c1.setAttribute("stroke","#fff");c1.setAttribute("stroke-width",2);
+    const c2=document.createElementNS(svgNS,"circle");c2.setAttribute("cx",x);c2.setAttribute("cy",y);c2.setAttribute("r",12);c2.setAttribute("fill","none");c2.setAttribute("stroke",dc);c2.setAttribute("stroke-width",1);c2.setAttribute("opacity",".3");
+    const t1=document.createElementNS(svgNS,"text");t1.setAttribute("x",x);t1.setAttribute("y",top?y-18:y+22);t1.setAttribute("text-anchor","middle");t1.setAttribute("font-size",11);t1.setAttribute("font-weight",700);t1.setAttribute("fill","#1a4fa0");t1.setAttribute("font-family","'Be Vietnam Pro',sans-serif");t1.textContent=p.ngan;
+    const t2=document.createElementNS(svgNS,"text");t2.setAttribute("x",x);t2.setAttribute("y",top?y-30:y+34);t2.setAttribute("text-anchor","middle");t2.setAttribute("font-size",9);t2.setAttribute("fill","#6b6b60");t2.setAttribute("font-family","'Be Vietnam Pro',sans-serif");t2.textContent=p.tieu_de.length>20?p.tieu_de.slice(0,18)+"…":p.tieu_de;
+    g.appendChild(c2);g.appendChild(c1);g.appendChild(t1);g.appendChild(t2);svg.appendChild(g);
+  });
+  const wrap=div("timeline-preview");wrap.appendChild(svg);return wrap;
 }
 
-/* ===== TRANG CHỦ ===== */
-function TrangChu({ goTo, openModal }) {
-  return (
-    <div>
-      <div className="hero">
-        <div className="hero-eyebrow">🌸 Hội Phụ Nữ Bầu Lâm · Xuyên Mộc · Bà Rịa-Vũng Tàu</div>
-        <h1 className="hero-title">
-          Học Tập &amp; Làm Theo
-          <span className="hero-title-accent">Tư Tưởng Hồ Chí Minh</span>
-        </h1>
-        <p className="hero-sub">Không gian số lưu giữ kho tàng tư liệu lịch sử quý giá về Bác vĩ đại, đồng thời biểu dương tinh thần đổi mới, sáng tạo học tập của tập thể cán bộ, hội viên Phụ nữ xã Bầu Lâm.</p>
-        <div className="hero-btns">
-          <button className="btn-primary" onClick={() => goTo("hanh-trinh")}>Khám Phá Hành Trình →</button>
-          <button className="btn-outline" onClick={() => goTo("guong-sang")}>Xem Gương Sáng</button>
-        </div>
-        <div className="stats-row" style={{maxWidth:600,margin:"48px auto 0"}}>
-          <div className="stat-card"><div className="stat-number">{DATA_HANH_TRINH.length}</div><div className="stat-label">Mốc lịch sử</div></div>
-          <div className="stat-card"><div className="stat-number">{DATA_GUONG_SANG.length}</div><div className="stat-label">Gương sáng</div></div>
-          <div className="stat-card"><div className="stat-number">{DATA_TAC_PHAM.length}</div><div className="stat-label">Tác phẩm</div></div>
-        </div>
-      </div>
+/* ============================================================  PAGES  ============================================================ */
+function renderTrangChu(){
+  const page=div("");
+  const hero=div("hero");
+  const eyebrow=div("hero-eyebrow");eyebrow.textContent="🌸 Hội Phụ Nữ Bầu Lâm · Xuyên Mộc · Bà Rịa-Vũng Tàu";
+  const title=el("h1",{className:"hero-title"});title.innerHTML='Học Tập &amp; Làm Theo<span class="hero-title-accent">Tư Tưởng Hồ Chí Minh</span>';
+  const sub=el("p",{className:"hero-sub"});sub.textContent="Không gian số lưu giữ kho tàng tư liệu lịch sử quý giá về Bác vĩ đại, đồng thời biểu dương tinh thần đổi mới, sáng tạo học tập của tập thể cán bộ, hội viên Phụ nữ xã Bàu Lâm.";
+  const btns=div("hero-btns");
+  btns.appendChild(btn("btn-primary","Khám Phá Hành Trình →",()=>goTo("hanh-trinh")));
+  btns.appendChild(btn("btn-outline","Xem Gương Sáng",()=>goTo("guong-sang")));
+  const stats=div("stats-row");stats.style.cssText="max-width:600px;margin:48px auto 0";
+  [{num:DATA_HANH_TRINH.length,lbl:"Mốc lịch sử"},{num:DATA_GUONG_SANG.length,lbl:"Gương sáng"},{num:DATA_TAC_PHAM.length,lbl:"Tác phẩm"}].forEach(s=>{
+    const sc=div("stat-card");const n=div("stat-number");n.textContent=s.num;const l=div("stat-label");l.textContent=s.lbl;sc.appendChild(n);sc.appendChild(l);stats.appendChild(sc);
+  });
+  hero.appendChild(eyebrow);hero.appendChild(title);hero.appendChild(sub);hero.appendChild(btns);hero.appendChild(stats);
+  page.appendChild(hero);
 
-      <div className="section-full section-alt">
-        <div className="inner">
-          <div className="section-header">
-            <div className="eyebrow">👤 Gương điển hình</div>
-            <h2 className="section-title">Những Gương Sáng Tại Bầu Lâm</h2>
-            <p className="section-desc">Những cá nhân xuất sắc học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh một cách thiết thực tại địa phương.</p>
-          </div>
-          <div className="grid-3">
-            {DATA_GUONG_SANG.slice(0,3).map(item => <GuongCard key={item.id} item={item} onClick={openModal}/>)}
-          </div>
-          <div className="view-more">
-            <button className="btn-outline" onClick={() => goTo("guong-sang")}>Xem Tất Cả Gương Sáng →</button>
-          </div>
-        </div>
-      </div>
+  const gs=div("section-full section-alt");const gsi=div("inner");
+  const gsh=div("section-header");gsh.innerHTML='<div class="eyebrow">👤 Gương điển hình</div><h2 class="section-title">Những Gương Sáng Tại Bàu Lâm</h2><p class="section-desc">Những cá nhân xuất sắc học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh một cách thiết thực tại địa phương.</p>';
+  const gg=div("grid-3");DATA_GUONG_SANG.slice(0,3).forEach(i=>gg.appendChild(renderGuongCard(i)));
+  const gvm=div("view-more");gvm.appendChild(btn("btn-outline","Xem Tất Cả Gương Sáng →",()=>goTo("guong-sang")));
+  gsi.appendChild(gsh);gsi.appendChild(gg);gsi.appendChild(gvm);gs.appendChild(gsi);page.appendChild(gs);
 
-      <div className="section-full" style={{background:"#fff"}}>
-        <div className="inner">
-          <div className="section-header">
-            <div className="eyebrow eyebrow-gold">📜 Cuộc Đời &amp; Sự Nghiệp</div>
-            <h2 className="section-title">Hành Trình Của Chủ Tịch Hồ Chí Minh</h2>
-            <p className="section-desc">Nhấp vào từng điểm sáng để khám phá những dấu mốc lịch sử trọng đại trong cuộc đời vĩ đại của Người.</p>
-          </div>
-          <TimelinePreview onViewAll={() => goTo("hanh-trinh")}/>
-          <div className="view-more">
-            <button className="btn-outline" onClick={() => goTo("hanh-trinh")}>Xem Đầy Đủ Hành Trình ({DATA_HANH_TRINH.length} mốc) →</button>
-          </div>
-        </div>
-      </div>
+  const ht=div("section-full");ht.style.background="#fff";const hti=div("inner");
+  const hth=div("section-header");hth.innerHTML='<div class="eyebrow eyebrow-gold">📜 Cuộc Đời &amp; Sự Nghiệp</div><h2 class="section-title">Hành Trình Của Chủ Tịch Hồ Chí Minh</h2><p class="section-desc">Nhấp vào từng điểm sáng để khám phá những dấu mốc lịch sử trọng đại.</p>';
+  const hvm=div("view-more");hvm.appendChild(btn("btn-outline","Xem Đầy Đủ Hành Trình ("+DATA_HANH_TRINH.length+" mốc) →",()=>goTo("hanh-trinh")));
+  hti.appendChild(hth);hti.appendChild(renderTimelinePreview());hti.appendChild(hvm);ht.appendChild(hti);page.appendChild(ht);
 
-      <div className="section-full section-alt">
-        <div className="inner">
-          <div className="section-header">
-            <div className="eyebrow">📚 Thư Viện</div>
-            <h2 className="section-title">Tác Phẩm Tiêu Biểu</h2>
-          </div>
-          <div className="grid-3">
-            {DATA_TAC_PHAM.slice(0,3).map(item => <TacPhamCard key={item.id} item={item} onClick={openModal}/>)}
-          </div>
-          <div className="view-more">
-            <button className="btn-outline" onClick={() => goTo("tac-pham")}>Xem Tất Cả Tác Phẩm →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const tp=div("section-full section-alt");const tpi=div("inner");
+  const tph=div("section-header");tph.innerHTML='<div class="eyebrow">📚 Thư Viện</div><h2 class="section-title">Tác Phẩm Tiêu Biểu</h2>';
+  const tpg=div("grid-3");DATA_TAC_PHAM.slice(0,3).forEach(i=>tpg.appendChild(renderTacPhamCard(i)));
+  const tpvm=div("view-more");tpvm.appendChild(btn("btn-outline","Xem Tất Cả Tác Phẩm →",()=>goTo("tac-pham")));
+  tpi.appendChild(tph);tpi.appendChild(tpg);tpi.appendChild(tpvm);tp.appendChild(tpi);page.appendChild(tp);
+  return page;
 }
 
-/* ===== GƯƠNG SÁNG ===== */
-function GuongSang({ openModal }) {
-  const [filter, setFilter] = useState("Tất Cả");
-  const filters = ["Tất Cả","Cá Nhân","Tập Thể"];
-  const list = filter==="Tất Cả" ? DATA_GUONG_SANG : DATA_GUONG_SANG.filter(i=>i.loai===filter);
-  return (
-    <div className="section">
-      <div className="section-header">
-        <div className="eyebrow">👤 Gương điển hình</div>
-        <h2 className="section-title">Gương Sáng Bầu Lâm</h2>
-        <p className="section-desc">Những cá nhân và tập thể tiêu biểu học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh.</p>
-      </div>
-      <div className="tabs">
-        {filters.map(f=><button key={f} className={`tab-btn${filter===f?" active":""}`} onClick={()=>setFilter(f)}>{f}</button>)}
-      </div>
-      {list.length===0
-        ? <div className="empty"><div className="empty-icon">👩</div><div className="empty-title">Chưa có dữ liệu</div><div className="empty-desc">Thêm gương sáng trong mục DATA_GUONG_SANG ở đầu file.</div></div>
-        : <div className="grid-3">{list.map(item=><GuongCard key={item.id} item={item} onClick={openModal}/>)}</div>
+function renderGuongSang(){
+  const page=div("section");
+  const header=div("section-header");header.innerHTML='<div class="eyebrow">👤 Gương điển hình</div><h2 class="section-title">Gương Sáng Bàu Lâm</h2><p class="section-desc">Những cá nhân và tập thể tiêu biểu học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh.</p>';
+  page.appendChild(header);
+  let filter="Tất Cả";const filterDiv=div("tabs");const grid=div("grid-3");
+  function renderGrid(){
+    grid.innerHTML="";
+    const list=filter==="Tất Cả"?DATA_GUONG_SANG:DATA_GUONG_SANG.filter(i=>i.loai===filter);
+    if(!list.length){const e=div("empty");e.innerHTML='<div class="empty-icon">👤</div><div class="empty-title">Chưa có dữ liệu</div>';grid.appendChild(e);}
+    else list.forEach(i=>grid.appendChild(renderGuongCard(i)));
+  }
+  ["Tất Cả","Cá Nhân","Tập Thể"].forEach(f=>{
+    const b=btn("tab-btn"+(filter===f?" active":""),f,()=>{
+      filter=f;filterDiv.querySelectorAll(".tab-btn").forEach(b2=>b2.classList.remove("active"));
+      filterDiv.querySelectorAll(".tab-btn")[["Tất Cả","Cá Nhân","Tập Thể"].indexOf(f)].classList.add("active");renderGrid();
+    });filterDiv.appendChild(b);
+  });
+  renderGrid();page.appendChild(filterDiv);page.appendChild(grid);return page;
+}
+
+function renderHanhTrinh(){
+  const page=div("section");page.style.maxWidth="960px";
+  const header=div("section-header");header.innerHTML='<div class="eyebrow eyebrow-gold">📜 Dòng thời gian</div><h2 class="section-title">Hành Trình Của Chủ Tịch Hồ Chí Minh</h2><p class="section-desc">'+DATA_HANH_TRINH.length+' mốc lịch sử quan trọng trong cuộc đời và sự nghiệp của Người.</p>';
+  page.appendChild(header);
+  const vtl=div("vtl");DATA_HANH_TRINH.forEach((item,idx)=>vtl.appendChild(renderVTItem(item,idx)));
+  page.appendChild(vtl);return page;
+}
+
+function renderTacPham(){
+  const page=div("section");
+  const header=div("section-header");header.innerHTML='<div class="eyebrow">📚 Kho tàng văn học</div><h2 class="section-title">Tác Phẩm về Chủ Tịch Hồ Chí Minh</h2><p class="section-desc">Tuyển tập thơ ca, văn xuôi và các tác phẩm do Người sáng tác hoặc viết về Người.</p>';
+  page.appendChild(header);
+  const searchDiv=div("");searchDiv.style.cssText="margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto";
+  const input=el("input",{type:"text",placeholder:"Tìm kiếm tác phẩm hoặc thể loại...",style:"width:100%;padding:10px 16px;border-radius:8px;border:1px solid var(--border);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s"});
+  input.addEventListener("focus",()=>input.style.borderColor="var(--primary)");
+  input.addEventListener("blur",()=>input.style.borderColor="var(--border)");
+  searchDiv.appendChild(input);
+  const grid=div("grid-3");
+  function renderGrid(kw=""){
+    grid.innerHTML="";
+    const k=kw.toLowerCase().trim();
+    const list=DATA_TAC_PHAM.filter(i=>i.ten.toLowerCase().includes(k)||i.tac_gia.toLowerCase().includes(k)||i.the_loai.toLowerCase().includes(k));
+    if(!list.length){const e=div("empty");e.innerHTML='<div class="empty-icon">📚</div><div class="empty-title">Không tìm thấy tác phẩm phù hợp</div>';grid.appendChild(e);}
+    else list.forEach(i=>grid.appendChild(renderTacPhamCard(i)));
+  }
+  input.addEventListener("input",e=>renderGrid(e.target.value));
+  renderGrid();page.appendChild(searchDiv);page.appendChild(grid);return page;
+}
+
+function renderHoiPhuNu(){
+  const page=div("");
+  const banner=div("hpn-banner");
+  banner.innerHTML='<div class="eyebrow" style="background:rgba(255,255,255,.15);color:#fff;margin-bottom:14px">🌸 Hội Phụ Nữ Bàu Lâm</div><h2 style="font-family:\'Cormorant Garamond\',serif;font-size:clamp(28px,5vw,44px);font-weight:700;margin-bottom:10px;color:#fff">Tin Tức &amp; Hoạt Động</h2><p style="font-size:15px;opacity:.8;max-width:500px;margin:0 auto;font-weight:300;line-height:1.7">Cập nhật các hoạt động, phong trào và tin tức của Hội Phụ nữ xã Bàu Lâm.</p>';
+  page.appendChild(banner);
+
+  const sec=div("section");
+  let filter="Tất Cả";const filterDiv=div("tabs");const grid=div("grid-3");
+  function renderGrid(){
+    grid.innerHTML="";
+    const list=filter==="Tất Cả"?DATA_HOI_PHU_NU:DATA_HOI_PHU_NU.filter(i=>i.the_loai===filter);
+    list.forEach(item=>{
+      const card=div("card");card.style.cursor="default";
+      const imgW=div("card-img");imgW.textContent="📰";imgW.style.fontSize="48px";card.appendChild(imgW);
+      const body=div("card-body");
+      const tags=div("card-tags");tags.appendChild(span("tag tag-green",item.the_loai));tags.appendChild(span("card-year",item.ngay));body.appendChild(tags);
+      const name=div("card-name");name.style.fontSize="16px";name.textContent=item.tieu_de;body.appendChild(name);
+      const desc=div("card-desc");desc.textContent=item.mo_ta;body.appendChild(desc);
+      if(item.link){
+        const lnkDiv=div("");lnkDiv.style.marginTop="12px";
+        const a=el("a",{href:item.link,target:"_blank",style:"display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#1877f2;background:rgba(24,119,242,.08);padding:6px 12px;border-radius:6px;"});
+        a.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Xem bài đăng Facebook';
+        lnkDiv.appendChild(a);body.appendChild(lnkDiv);
       }
-    </div>
-  );
+      card.appendChild(body);grid.appendChild(card);
+    });
+  }
+  ["Tất Cả","Hoạt Động","Phong Trào"].forEach(f=>{
+    const b=btn("tab-btn"+(filter===f?" active":""),f,()=>{
+      filter=f;filterDiv.querySelectorAll(".tab-btn").forEach(b2=>b2.classList.remove("active"));
+      filterDiv.querySelectorAll(".tab-btn")[["Tất Cả","Hoạt Động","Phong Trào"].indexOf(f)].classList.add("active");renderGrid();
+    });filterDiv.appendChild(b);
+  });
+  renderGrid();sec.appendChild(filterDiv);sec.appendChild(grid);
+
+  /* CONTACT BOX */
+  const cBox=div("contact-box");
+  const cTitle=div("contact-box-title");cTitle.textContent="📋 Thông tin liên hệ & Kết nối";cBox.appendChild(cTitle);
+  const cGrid=div("contact-grid");
+
+  function ci(label,html){
+    const w=div("");
+    const l=div("ci-label");l.textContent=label;w.appendChild(l);
+    const v=div("ci-value");v.innerHTML=html;w.appendChild(v);
+    return w;
+  }
+  cGrid.appendChild(ci("Địa chỉ trụ sở","Trụ sở UBND xã Bàu Lâm, huyện Xuyên Mộc, tỉnh Bà Rịa – Vũng Tàu"));
+  cGrid.appendChild(ci("Chủ tịch Hội LHPN","<strong>Bà Hoàng Thị Hiền</strong><br><span style='font-size:12px;color:var(--muted)'>Kiêm: Phó Chủ tịch Ủy ban MTTQ Việt Nam xã Bàu Lâm</span><br><span style='font-size:12px;color:var(--muted)'>Tiền nhiệm: Bà Lê Thị Thanh Sang</span>"));
+  cGrid.appendChild(ci("Thông tin trực tuyến","Hoạt động được cập nhật thường xuyên trên <em>Cổng Thông Tin Hội Liên hiệp Phụ nữ Việt Nam</em>."));
+  cBox.appendChild(cGrid);
+
+  const fbBtn=el("a",{href:"https://www.facebook.com/profile.php?id=61578203680234",target:"_blank",className:"fb-btn"});
+  fbBtn.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Trang Facebook Hội LHPN xã Bàu Lâm';
+  cBox.appendChild(fbBtn);
+  sec.appendChild(cBox);page.appendChild(sec);return page;
 }
 
-/* ===== HÀNH TRÌNH ===== */
-function HanhTrinh() {
-  const [filter, setFilter] = useState("Tất Cả");
-  const cats = ["Tất Cả","Cuộc Đời","Sự Nghiệp","Tư Tưởng","Di Sản"];
-  const list = filter==="Tất Cả" ? DATA_HANH_TRINH : DATA_HANH_TRINH.filter(i=>i.cat===filter);
-  return (
-    <div className="section" style={{maxWidth:960}}>
-      <div className="section-header">
-        <div className="eyebrow eyebrow-gold">📜 Dòng thời gian</div>
-        <h2 className="section-title">Hành Trình Của Chủ Tịch Hồ Chí Minh</h2>
-        <p className="section-desc">{DATA_HANH_TRINH.length} mốc lịch sử quan trọng trong cuộc đời và sự nghiệp của Người.</p>
-      </div>
-      <div className="tabs">
-        {cats.map(c=><button key={c} className={`tab-btn${filter===c?" active":""}`} onClick={()=>setFilter(c)}>{c}</button>)}
-      </div>
-      <div className="vtl">
-        {list.map((item,idx)=><VTItem key={item.id} item={item} idx={idx}/>)}
-      </div>
-    </div>
-  );
+/* ============================================================  NAV / FOOTER  ============================================================ */
+function renderNav(){
+  const nav=el("nav",{className:"nav"});
+  const brand=div("nav-brand");brand.addEventListener("click",()=>goTo("trang-chu"));
+  const bm=div("nav-brand-main");bm.textContent="Di Sản Hồ Chí Minh";
+  const bs=div("nav-brand-sub");bs.textContent="Hội Phụ Nữ Bàu Lâm";
+  brand.appendChild(bm);brand.appendChild(bs);
+  const links=div("nav-links");
+  PAGES.forEach((p,i)=>{const b=btn("nav-btn"+(state.page===p?" active":""),PAGE_LABELS[i],()=>goTo(p));links.appendChild(b);});
+  const ham=el("button",{className:"hamburger",onClick:()=>setState({menuOpen:!state.menuOpen})});ham.textContent="☰";
+  nav.appendChild(brand);nav.appendChild(links);nav.appendChild(ham);return nav;
 }
-
-/* ===== TÁC PHẨM ===== */
-function TacPham({ openModal }) {
-  const [filter, setFilter] = useState("Tất Cả");
-  const cats = ["Tất Cả","Thơ Ca","Văn Xuôi","Nhật Ký","Diễn Văn","Truyện Ngắn","Khác"];
-  const list = filter==="Tất Cả" ? DATA_TAC_PHAM : DATA_TAC_PHAM.filter(i=>i.the_loai===filter);
-  return (
-    <div className="section">
-      <div className="section-header">
-        <div className="eyebrow">📚 Kho tàng văn học</div>
-        <h2 className="section-title">Tác Phẩm về Chủ Tịch Hồ Chí Minh</h2>
-        <p className="section-desc">Tuyển tập thơ ca, văn xuôi và các tác phẩm do Người sáng tác hoặc viết về Người.</p>
-      </div>
-      <div className="tabs">
-        {cats.map(c=><button key={c} className={`tab-btn${filter===c?" active":""}`} onClick={()=>setFilter(c)}>{c}</button>)}
-      </div>
-      {list.length===0
-        ? <div className="empty"><div className="empty-icon">📚</div><div className="empty-title">Chưa có tác phẩm</div><div className="empty-desc">Thêm tác phẩm trong mục DATA_TAC_PHAM ở đầu file.</div></div>
-        : <div className="grid-3">{list.map(item=><TacPhamCard key={item.id} item={item} onClick={openModal}/>)}</div>
-      }
-    </div>
-  );
+function renderMobileMenu(){
+  if(!state.menuOpen)return null;
+  const menu=div("mobile-menu open");
+  PAGES.forEach((p,i)=>{const b=btn("mobile-btn"+(state.page===p?" active":""),PAGE_LABELS[i],()=>goTo(p));menu.appendChild(b);});
+  return menu;
 }
-
-/* ===== HỘI PHỤ NỮ ===== */
-function HoiPhuNu() {
-  const [filter, setFilter] = useState("Tất Cả");
-  const cats = ["Tất Cả","Hoạt Động","Tin Tức","Thông Báo","Phong Trào"];
-  const list = filter==="Tất Cả" ? DATA_HOI_PHU_NU : DATA_HOI_PHU_NU.filter(i=>i.the_loai===filter);
-  return (
-    <div>
-      <div className="hpn-banner">
-        <div className="eyebrow" style={{background:"rgba(255,255,255,.15)",color:"#fff",marginBottom:14}}>🌸 Hội Phụ Nữ Bầu Lâm</div>
-        <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(28px,5vw,44px)",fontWeight:700,marginBottom:10,color:"#fff"}}>Tin Tức &amp; Hoạt Động</h2>
-        <p style={{fontSize:15,opacity:.8,maxWidth:500,margin:"0 auto",fontWeight:300,lineHeight:1.7}}>Cập nhật các hoạt động, phong trào và tin tức của Hội Phụ nữ xã Bầu Lâm.</p>
-      </div>
-      <div className="section">
-        <div className="tabs">
-          {cats.map(c=><button key={c} className={`tab-btn${filter===c?" active":""}`} onClick={()=>setFilter(c)}>{c}</button>)}
+function renderFooter(){
+  const ft=el("footer",{});
+  ft.style.cssText="background:#1a1a18;color:rgba(255,255,255,.6);padding:52px 32px 24px";
+  ft.innerHTML=`<div style="max-width:1120px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;margin-bottom:36px">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:10px">Di Sản Hồ Chí Minh</div>
+        <div style="font-size:13px;line-height:1.7;max-width:280px;margin-bottom:16px">Không gian số hóa tư liệu lịch sử và biểu dương gương sáng học tập theo tư tưởng Hồ Chí Minh của Hội Phụ nữ xã Bàu Lâm.</div>
+        <div style="font-size:12px;line-height:1.8">
+          <div>📍 UBND xã Bàu Lâm, huyện Xuyên Mộc</div>
+          <div style="margin-left:20px">tỉnh Bà Rịa-Vũng Tàu</div>
+          <div style="margin-top:4px">🌸 Hội Liên hiệp Phụ nữ xã Bàu Lâm</div>
         </div>
-        {list.length===0
-          ? <div className="empty"><div className="empty-icon">📋</div><div className="empty-title">Chưa có tin tức</div><div className="empty-desc">Thêm tin tức trong mục DATA_HOI_PHU_NU ở đầu file.</div></div>
-          : <div className="grid-3">
-              {list.map(item=>(
-                <div className="card" key={item.id} style={{cursor:"default"}}>
-                  <div className="card-img">{item.anh?<img src={item.anh} alt={item.tieu_de}/>:<span style={{fontSize:48}}>📰</span>}</div>
-                  <div className="card-body">
-                    <div className="card-tags"><span className="tag tag-green">{item.the_loai}</span><span className="card-year">{item.ngay}</span></div>
-                    <div className="card-name" style={{fontSize:16}}>{item.tieu_de}</div>
-                    <div className="card-desc">{item.mo_ta}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-        }
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">Liên Kết Nhanh</div>
+        ${PAGES.map((p,i)=>`<button onclick="goTo('${p}')" style="display:block;font-size:13px;color:rgba(255,255,255,.55);margin-bottom:8px;background:none;border:none;text-align:left;cursor:pointer;font-family:inherit;padding:0">${PAGE_LABELS[i]}</button>`).join("")}
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:12px">Nguồn Tư Liệu</div>
+        <div style="font-size:13px;line-height:2">hochiminh.vn<br>baotanghochiminh.vn<br>Hồ Chí Minh Toàn Tập (NXB CTQG)</div>
       </div>
     </div>
-  );
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:20px;font-size:12px;text-align:center">
+      © ${new Date().getFullYear()} Hội Phụ Nữ Bàu Lâm · Xuyên Mộc · Bà Rịa-Vũng Tàu. Tất cả quyền được bảo lưu.
+    </div>
+  </div>`;
+  return ft;
 }
 
-/* ===== APP ROOT ===== */
-function App() {
-  const [page, setPage] = useState("trang-chu");
-  const [modal, setModal] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [toast, setToast] = useState(null);
-
-  const goTo = (p) => { setPage(p); setMenuOpen(false); window.scrollTo({top:0,behavior:"smooth"}); };
-  const openModal = (item) => setModal(item);
-  const closeModal = () => setModal(null);
-  const showToast = (msg) => { setToast(msg); setTimeout(()=>setToast(null),3000); };
-
-  return (
-    <>
-      <nav className="nav">
-        <div className="nav-brand" onClick={() => goTo("trang-chu")}>
-          <span className="nav-brand-main">Di Sản Hồ Chí Minh</span>
-          <span className="nav-brand-sub">Hội Phụ Nữ Bầu Lâm</span>
-        </div>
-        <div className="nav-links">
-          {PAGES.map((p,i)=>(
-            <button key={p} className={`nav-btn${page===p?" active":""}`} onClick={()=>goTo(p)}>{PAGE_LABELS[i]}</button>
-          ))}
-        </div>
-        <button className="hamburger" onClick={()=>setMenuOpen(o=>!o)}>☰</button>
-      </nav>
-
-      {menuOpen && (
-        <div className="mobile-menu open">
-          {PAGES.map((p,i)=>(
-            <button key={p} className={`mobile-btn${page===p?" active":""}`} onClick={()=>goTo(p)}>{PAGE_LABELS[i]}</button>
-          ))}
-        </div>
-      )}
-
-      <div className="page">
-        {page==="trang-chu"  && <TrangChu goTo={goTo} openModal={openModal}/>}
-        {page==="guong-sang" && <GuongSang openModal={openModal}/>}
-        {page==="hanh-trinh" && <HanhTrinh/>}
-        {page==="tac-pham"   && <TacPham openModal={openModal}/>}
-        {page==="hoi-phu-nu" && <HoiPhuNu/>}
-      </div>
-
-      <footer style={{background:var_fg,color:"rgba(255,255,255,.6)",padding:"52px 32px 24px"}}>
-        <div style={{maxWidth:1120,margin:"0 auto"}}>
-          <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr",gap:40,marginBottom:36,flexWrap:"wrap"}}>
-            <div>
-              <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:18,fontWeight:700,color:"#fff",marginBottom:10}}>Di Sản Hồ Chí Minh</div>
-              <div style={{fontSize:13,lineHeight:1.7,maxWidth:280,marginBottom:16}}>Không gian số hóa tư liệu lịch sử và biểu dương gương sáng học tập theo tư tưởng Hồ Chí Minh của Hội Phụ nữ xã Bầu Lâm.</div>
-              <div style={{fontSize:12,lineHeight:1.8}}>
-                <div>📍 UBND xã Bầu Lâm, huyện Xuyên Mộc</div>
-                <div style={{marginLeft:20}}>tỉnh Bà Rịa-Vũng Tàu</div>
-                <div style={{marginTop:4}}>🌸 Hội Liên hiệp Phụ nữ xã Bầu Lâm</div>
-              </div>
-            </div>
-            <div>
-              <div style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"rgba(255,255,255,.4)",marginBottom:12}}>Liên Kết Nhanh</div>
-              {PAGES.map((p,i)=>(
-                <button key={p} onClick={()=>goTo(p)} style={{display:"block",fontSize:13,color:"rgba(255,255,255,.55)",marginBottom:8,background:"none",border:"none",textAlign:"left",cursor:"pointer",fontFamily:"inherit",padding:0,transition:"color .2s"}}
-                  onMouseEnter={e=>e.target.style.color="#fff"} onMouseLeave={e=>e.target.style.color="rgba(255,255,255,.55)"}>{PAGE_LABELS[i]}</button>
-              ))}
-            </div>
-            <div>
-              <div style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"rgba(255,255,255,.4)",marginBottom:12}}>Thông Tin</div>
-              <button onClick={()=>showToast("Tính năng sẽ sớm ra mắt 🌸")} style={{display:"block",fontSize:13,color:"rgba(255,255,255,.55)",marginBottom:8,background:"none",border:"none",textAlign:"left",cursor:"pointer",fontFamily:"inherit",padding:0}}>Chính Sách Bảo Mật</button>
-              <button onClick={()=>showToast("Tính năng sẽ sớm ra mắt 🌸")} style={{display:"block",fontSize:13,color:"rgba(255,255,255,.55)",marginBottom:8,background:"none",border:"none",textAlign:"left",cursor:"pointer",fontFamily:"inherit",padding:0}}>Điều Khoản Sử Dụng</button>
-              <button onClick={()=>showToast("Liên hệ: Hội Phụ nữ xã Bầu Lâm, Xuyên Mộc, BRVT 🌸")} style={{display:"block",fontSize:13,color:"rgba(255,255,255,.55)",marginBottom:8,background:"none",border:"none",textAlign:"left",cursor:"pointer",fontFamily:"inherit",padding:0}}>Liên Hệ Ban Quản Trị</button>
-              <div style={{marginTop:16,padding:"12px 0",borderTop:"1px solid rgba(255,255,255,.1)",fontSize:12,lineHeight:1.7}}>
-                <div style={{color:"rgba(255,255,255,.4)",fontSize:10,fontWeight:700,textTransform:"uppercase",letterSpacing:".08em",marginBottom:6}}>Nguồn tư liệu tham khảo</div>
-                <div>hochiminh.vn</div>
-                <div>baotanghochiminh.vn</div>
-                <div>Hồ Chí Minh Toàn Tập (NXB CTQG)</div>
-              </div>
-            </div>
-          </div>
-          <div style={{borderTop:"1px solid rgba(255,255,255,.08)",paddingTop:20,fontSize:12,textAlign:"center"}}>
-            © {new Date().getFullYear()} Hội Phụ Nữ Bầu Lâm · Xuyên Mộc · Bà Rịa-Vũng Tàu. Tất cả quyền được bảo lưu.
-          </div>
-        </div>
-      </footer>
-
-      {modal && <Modal item={modal} onClose={closeModal}/>}
-
-      {/* FIXED: Toast thay cho alert() */}
-      {toast && <div className="toast">🌸 {toast}</div>}
-
-      {/* Floating button — FIXED: dùng showToast thay vì alert() */}
-      <button className="gift-float" title="Thông báo" onClick={()=>showToast("Tính năng tải tài liệu sẽ sớm ra mắt! 🎁")}>🎁</button>
-    </>
-  );
+/* ============================================================  RENDER  ============================================================ */
+function render(){
+  const root=document.getElementById("root");root.innerHTML="";
+  root.appendChild(renderNav());
+  const mm=renderMobileMenu();if(mm)root.appendChild(mm);
+  const wrap=div("page");
+  if(state.page==="trang-chu")wrap.appendChild(renderTrangChu());
+  else if(state.page==="guong-sang")wrap.appendChild(renderGuongSang());
+  else if(state.page==="hanh-trinh")wrap.appendChild(renderHanhTrinh());
+  else if(state.page==="tac-pham")wrap.appendChild(renderTacPham());
+  else if(state.page==="hoi-phu-nu")wrap.appendChild(renderHoiPhuNu());
+  root.appendChild(wrap);root.appendChild(renderFooter());
+  const modal=renderModal();if(modal)root.appendChild(modal);
+  if(state.toast){const t=div("toast");t.textContent="🌸 "+state.toast;root.appendChild(t);}
+  const gf=el("button",{className:"gift-float",onClick:()=>showToast("Tính năng tải tài liệu sẽ sớm ra mắt! 🎁")});gf.textContent="🎁";root.appendChild(gf);
 }
-
-const var_fg = "#1a1a18";
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+render();
 </script>
 </body>
 </html>
