@@ -187,91 +187,7 @@ const DATA_TAC_PHAM = [
   { id:8, ten:"Bác Hồ kính yêu", tac_gia:"Nhiều tác giả", the_loai:"Văn Xuôi", nam:2021, anh_bia:"https://cdn1.fahasa.com/media/catalog/product/i/m/image_189960.jpg", bieu_tuong:"📜", mo_ta:"Tuyển tập những câu chuyện ý nghĩa chọn lọc từ các nguồn sách báo uy tín. Độc giả sẽ được gặp lại những mẩu chuyện xúc động như 'Hai bàn tay', chuyện anh Ba làm phụ bếp, chuyện Bác làm báo 'Người cùng khổ'." },
   { id:9, ten:"Nhật kí trong tù", tac_gia:"Chủ tịch Hồ Chí Minh", the_loai:"Thơ Ca", nam:1943, anh_bia:"https://cdnmedia.baotintuc.vn/Upload/pTMF1jgWpbjY1m8G1xWUsg/files/2021/06/sach%20ve%20bac/bacho2%20(5).jpg", bieu_tuong:"❤️", mo_ta:"Tập thơ chữ Hán vô giá gồm những bài thơ Bác viết trong thời gian bị chính quyền Tưởng Giới Thạch bắt giam từ 1942–1943. Đây là kiệt tác văn học phản ánh tâm hồn thanh cao, ý chí thép và tinh thần lạc quan cách mạng của một bậc đại trí, đại dũng." }
 ];
-function handleCreatePost() {
-  const titleInput = document.getElementById("post-title");
-  const catInput = document.getElementById("post-category");
-  const descInput = document.getElementById("post-desc");
-  const linkInput = document.getElementById("post-link");
-  const btnSubmit = document.getElementById("btn-submit-post");
 
-  const title = titleInput.value.trim();
-  const desc = descInput.value.trim();
-
-  if (!title || !desc) {
-    alert("Vui lòng điền đầy đủ Tiêu đề và Mô tả hoạt động nha!");
-    return;
-  }
-
-  // Đổi trạng thái nút bấm để người dùng không bấm liên tiếp nhiều lần
-  btnSubmit.disabled = true;
-  btnSubmit.textContent = "⚡ Đang tải bài lên...";
-
-  // Gom dữ liệu thành dạng JSON đúng cấu trúc các cột trên Google Sheet
-  const newPost = {
-    id: Date.now(), // tạo ID tự động bằng thời gian hiện tại
-    tieu_de: title,
-    the_loai: catInput.value,
-    ngay: new Date().toLocaleDateString("vi-VN"), // tự động lấy ngày hôm nay
-    mo_ta: desc,
-    link: linkInput.value.trim(),
-    anh: "" // Hiện tại để trống, hoặc dán chuỗi base64 nếu có
-  };
-
-  // Gửi dữ liệu sang Google Apps Script
-  fetch(GOOGLE_SHEET_API, {
-    method: "POST",
-    mode: "no-cors", // Bắt buộc phải có đối với Google Script
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newPost)
-  })
-  .then(() => {
-    alert("🎉 Đăng bài thành công! Bài viết đã được lưu vào Google Sheet trọn đời.");
-    
-    // Xóa sạch ô nhập liệu để sẵn sàng cho bài viết tiếp theo
-    titleInput.value = "";
-    descInput.value = "";
-    linkInput.value = "";
-    
-    // Đợi 1.5 giây để Google Sheet cập nhật xong dữ liệu thì tải lại danh sách mới
-    setTimeout(fetchDataFromGoogleSheet, 1500);
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Có lỗi xảy ra khi kết nối mạng!");
-  })
-  .finally(() => {
-    btnSubmit.disabled = false;
-    btnSubmit.textContent = "Đăng bài lên hệ thống";
-  });
-}
-// 1. Dán đường link API Google của bạn vào đây
-const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbxRGR-COu7i8UQnTok_mqR9uElyTBO3CFb4tv7OA4zrteI0njao3gnbVToU9YI1qXRj/exec";
-
-// 2. Mảng chứa các bài viết động được lấy từ Google Sheet về
-let DYNAMIC_HOI_PHU_NU = [];
-
-// 3. Hàm tự động gọi lên Google Sheet để lấy bài viết mới về web
-function fetchDataFromGoogleSheet() {
-  fetch(GOOGLE_SHEET_API)
-    .then(res => res.json())
-    .then(data => {
-      if (Array.isArray(data)) {
-        // Lật ngược mảng để bài nào vừa đăng trên Sheet sẽ nhảy lên đầu
-        DYNAMIC_HOI_PHU_NU = data.reverse();
-        
-        // Nếu người dùng đang xem tab Hội Phụ Nữ thì vẽ lại giao diện để cập nhật bài mới
-        if (typeof state !== 'undefined' && state.page === "hoi-phu-nu") {
-          render(); 
-        }
-      }
-    })
-    .catch(err => console.error("Lỗi khi lấy dữ liệu từ Google Sheet:", err));
-}
-
-// Chạy hàm này ngay khi trang web vừa được tải xong
-fetchDataFromGoogleSheet();
 const DATA_HOI_PHU_NU = [
   { 
     id: 1, 
@@ -619,94 +535,200 @@ function renderTacPham(){
   renderGrid();page.appendChild(searchDiv);page.appendChild(grid);return page;
 }
 
+// ============================================================
+// CẤU HÌNH ĐỒNG BỘ GOOGLE SHEET API TRỌN ĐỜI
+// ============================================================
+const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbxRGR-COu7i8UQnTok_mqR9uElyTBO3CFb4tv7OA4zrteI0njao3gnbVToU9YI1qXRj/exec";
+let DYNAMIC_HOI_PHU_NU = [];
+
+function fetchDataFromGoogleSheet() {
+  fetch(GOOGLE_SHEET_API)
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data)) {
+        // Lật ngược danh sách để bài mới đăng lên Sheet nhảy lên đầu trang web
+        DYNAMIC_HOI_PHU_NU = data.reverse();
+        
+        // Nếu người dùng đang đứng ở tab hội phụ nữ thì tự động render lại giao diện
+        if (typeof state !== 'undefined' && state.page === "hoi-phu-nu") {
+          render(); 
+        }
+      }
+    })
+    .catch(err => console.error("Lỗi đồng bộ dữ liệu Google Sheet:", err));
+}
+
+// Chạy tự động ngay khi tải trang web lần đầu
+fetchDataFromGoogleSheet();
+
+// Hàm xử lý đẩy bài viết mới lên Google Sheet khi bấm nút Đăng
+function handleCreatePost() {
+  const titleInput = document.getElementById("post-title");
+  const catInput = document.getElementById("post-category");
+  const descInput = document.getElementById("post-desc");
+  const linkInput = document.getElementById("post-link");
+  const btnSubmit = document.getElementById("btn-submit-post");
+
+  if (!titleInput || !descInput || !btnSubmit) return;
+
+  const title = titleInput.value.trim();
+  const desc = descInput.value.trim();
+
+  if (!title || !desc) {
+    alert("Vui lòng nhập đầy đủ Tiêu đề và Nội dung mô tả hoạt động!");
+    return;
+  }
+
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = "⚡ Đang xử lý đăng bài...";
+
+  const newPost = {
+    id: Date.now(),
+    tieu_de: title,
+    the_loai: catInput.value,
+    ngay: new Date().toLocaleDateString("vi-VN"), // Tự động lấy ngày hôm nay
+    mo_ta: desc,
+    link: linkInput.value.trim(),
+    anh: "" // Tạm thời để trống
+  };
+
+  fetch(GOOGLE_SHEET_API, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newPost)
+  })
+  .then(() => {
+    alert("🎉 Đăng bài thành công! Dữ liệu đã được lưu trữ an toàn.");
+    titleInput.value = "";
+    descInput.value = "";
+    linkInput.value = "";
+    // Đợi 1 giây cho dữ liệu ổn định rồi kéo danh sách mới về
+    setTimeout(fetchDataFromGoogleSheet, 1000);
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Đã xảy ra lỗi mạng khi kết nối cơ sở dữ liệu!");
+  })
+  .finally(() => {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = "Đăng bài lên hệ thống";
+  });
+}
+
+// ============================================================
+// HÀM HIỂN THỊ TAB HỘI PHỤ NỮ (GỘP BÀI MỚI + BÀI CÓ SẴN)
+// ============================================================
 function renderHoiPhuNu() {
+  // Tạo khung section bằng hàm div() mặc định trong code của bạn
   const container = div("section animate-fade");
 
-  // --- PHẦN 1: FORM ĐĂNG BÀI (XUẤT HIỆN Ở ĐẦU TRANG) ---
+  // Khối 1: Form Đăng bài mới lên Google Sheet
   const formBox = div("");
-  formBox.style = "background:var(--card); border:1px solid var(--border); padding:20px; border-radius:12px; margin-bottom:30px;";
+  formBox.style.background = "var(--card)";
+  formBox.style.border = "1px solid var(--border)";
+  formBox.style.padding = "20px";
+  formBox.style.borderRadius = "12px";
+  formBox.style.marginBottom = "30px";
   formBox.innerHTML = `
-    <h3 style="margin-top:0; margin-bottom:15px; color:var(--primary); font-size:20px;">✍️ Đăng Hoạt Động Mới (Lưu Vào Google Sheet)</h3>
+    <h3 style="margin-top:0; margin-bottom:15px; color:var(--primary); font-size:20px; font-family:'Cormorant Garamond',serif; font-weight:700;">✍️ Đăng Hoạt Động Mới</h3>
     <div style="display:flex; flex-direction:column; gap:12px;">
-      <input type="text" id="post-title" placeholder="Tiêu đề hoạt động..." style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%;">
+      <input type="text" id="post-title" placeholder="Tiêu đề hoạt động..." style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%; background:var(--card); color:var(--fg);">
       
-      <select id="post-category" style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%;">
+      <select id="post-category" style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%; background:var(--card); color:var(--fg);">
         <option value="Hoạt Động">Hoạt Động</option>
         <option value="Phong Trào">Phong Trào</option>
         <option value="Mô Hình">Mô Hình</option>
       </select>
       
-      <textarea id="post-desc" placeholder="Mô tả nội dung chi tiết..." rows="3" style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%; resize:vertical;"></textarea>
+      <textarea id="post-desc" placeholder="Mô tả nội dung chi tiết..." rows="3" style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%; resize:vertical; background:var(--card); color:var(--fg);"></textarea>
       
-      <input type="text" id="post-link" placeholder="Link video YouTube hoặc bài đăng Facebook (nếu có)..." style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%;">
+      <input type="text" id="post-link" placeholder="Link video YouTube hoặc bài đăng Facebook (nếu có)..." style="padding:10px; border:1px solid var(--border); border-radius:6px; font-family:inherit; font-size:14px; width:100%; background:var(--card); color:var(--fg);">
       
-      <button id="btn-submit-post" onclick="handleCreatePost()" style="background:var(--primary); color:white; border:none; padding:12px; border-radius:6px; font-weight:600; font-size:14px; cursor:pointer; transition:all 0.2s;">Đăng bài lên hệ thống</button>
+      <button id="btn-submit-post" onclick="handleCreatePost()" style="background:var(--primary); color:white; border:none; padding:12px; border-radius:6px; font-weight:600; font-size:14px; cursor:pointer;">Đăng bài lên hệ thống</button>
     </div>
   `;
   container.appendChild(formBox);
 
-  // --- PHẦN 2: TIÊU ĐỀ CHÍNH CỦA TRANG ---
-  const h = el("h2", { class: "section-title" });
-  h.textContent = "Hoạt Động Hội Phụ Nữ Xã Bàu Lâm";
-  container.appendChild(h);
+  // Khối 2: Tiêu đề trang dùng Javascript nguyên bản
+  const h2Title = document.createElement("h2");
+  h2Title.className = "section-title";
+  h2Title.textContent = "Hoạt Động Hội Phụ Nữ Xã Bàu Lâm";
+  container.appendChild(h2Title);
 
+  // Khối 3: Lưới danh sách bài viết Grid
   const grid = div("grid");
 
-  // --- PHẦN 3: GỘP MẢNG ĐỘNG (GOOGLE SHEET) VÀ MẢNG CÓ SẴN ---
-  // Bài viết mới trên Google Sheet sẽ xếp lên trước, bài viết cố định xếp ở sau
+  // Đồng bộ gộp 2 mảng: Mảng động (từ Sheet về) đứng TRƯỚC, mảng tĩnh DATA_HOI_PHU_NU ban đầu đứng SAU
   const totalList = [...DYNAMIC_HOI_PHU_NU, ...DATA_HOI_PHU_NU];
 
   totalList.forEach(item => {
     const card = div("card");
     card.style.cursor = "default";
 
-    // Xử lý hiển thị hình ảnh hoặc icon tờ báo
+    // Khối bao ảnh
     const imgW = div("card-img");
     if (item.anh && item.anh.trim() !== "") {
-      const img = el("img", { src: item.anh, alt: item.tieu_de });
-      img.style.width = "100%";
-      img.style.height = "100%";
-      img.style.objectFit = "cover";
-      imgW.appendChild(img);
+      const imgObj = document.createElement("img");
+      imgObj.src = item.anh;
+      imgObj.alt = item.tieu_de || "";
+      imgObj.style.width = "100%";
+      imgObj.style.height = "100%";
+      imgObj.style.objectFit = "cover";
+      imgW.appendChild(imgObj);
     } else {
       imgW.textContent = "📰";
       imgW.style.fontSize = "48px";
+      imgW.style.display = "flex";
+      imgW.style.alignItems = "center";
+      imgW.style.justifyContent = "center";
+      imgW.style.background = "var(--bg2)";
     }
     card.appendChild(imgW);
 
-    // Phần thông tin chữ của card
+    // Khối thông tin chữ bên trong Card
     const body = div("card-body");
     
     const meta = div("card-meta");
     meta.innerHTML = `<span class="badge">${item.the_loai}</span><span>${item.ngay}</span>`;
     body.appendChild(meta);
 
-    const title = el("h3", { class: "card-title" });
-    title.textContent = item.tieu_de;
-    body.appendChild(title);
+    const titleObj = document.createElement("h3");
+    titleObj.className = "card-title";
+    titleObj.textContent = item.tieu_de;
+    body.appendChild(titleObj);
 
-    const desc = el("p", { class: "card-desc" });
-    desc.textContent = item.mo_ta;
-    body.appendChild(desc);
+    const descObj = document.createElement("p");
+    descObj.className = "card-desc";
+    descObj.textContent = item.mo_ta;
+    body.appendChild(descObj);
 
-    // Xử lý hiển thị nút bấm chuyển đến Link (Facebook hoặc YouTube)
+    // Tạo nút bấm nếu bài viết có đính kèm đường link Facebook/Youtube
     if (item.link && item.link.trim() !== "") {
       const lnkDiv = div("");
       lnkDiv.style.marginTop = "12px";
       const isYoutube = item.link.includes("youtube.com") || item.link.includes("youtu.be");
       
-      const a = el("a", {
-        href: item.link,
-        target: "_blank",
-        style: `display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:${isYoutube ? '#ff0000' : '#1877f2'}; background:${isYoutube ? 'rgba(255,0,0,.08)' : 'rgba(24,119,242,.08)'}; padding:6px 12px; border-radius:6px; text-decoration:none;`
-      });
+      const aLink = document.createElement("a");
+      aLink.href = item.link;
+      aLink.target = "_blank";
+      aLink.style.display = "inline-flex";
+      aLink.style.alignItems = "center";
+      aLink.style.gap = "5px";
+      aLink.style.fontSize = "12px";
+      aLink.style.fontWeight = "600";
+      aLink.style.color = isYoutube ? '#ff0000' : '#1877f2';
+      aLink.style.background = isYoutube ? 'rgba(255,0,0,.08)' : 'rgba(24,119,242,.08)';
+      aLink.style.padding = "6px 12px";
+      aLink.style.borderRadius = "6px";
+      aLink.style.textDecoration = "none";
       
       if (isYoutube) {
-        a.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 $.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Xem Video YouTube`;
+        aLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 $.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Xem Video`;
       } else {
-        a.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Xem Bài Viết`;
+        aLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Xem Bài Viết`;
       }
-      lnkDiv.appendChild(a);
+      lnkDiv.appendChild(aLink);
       body.appendChild(lnkDiv);
     }
 
@@ -716,35 +738,6 @@ function renderHoiPhuNu() {
 
   container.appendChild(grid);
   return container;
-}
-  ["Tất Cả","Hoạt Động","Phong Trào"].forEach(f=>{
-    const b=btn("tab-btn"+(filter===f?" active":""),f,()=>{
-      filter=f;filterDiv.querySelectorAll(".tab-btn").forEach(b2=>b2.classList.remove("active"));
-      filterDiv.querySelectorAll(".tab-btn")[["Tất Cả","Hoạt Động","Phong Trào"].indexOf(f)].classList.add("active");renderGrid();
-    });filterDiv.appendChild(b);
-  });
-  renderGrid();sec.appendChild(filterDiv);sec.appendChild(grid);
-
-  /* CONTACT BOX */
-  const cBox=div("contact-box");
-  const cTitle=div("contact-box-title");cTitle.textContent="📋 Thông tin liên hệ & Kết nối";cBox.appendChild(cTitle);
-  const cGrid=div("contact-grid");
-
-  function ci(label,html){
-    const w=div("");
-    const l=div("ci-label");l.textContent=label;w.appendChild(l);
-    const v=div("ci-value");v.innerHTML=html;w.appendChild(v);
-    return w;
-  }
-  cGrid.appendChild(ci("Địa chỉ trụ sở","Ấp 2 Đông, Xã Bàu Lâm, Thành phố Hồ Chí Minh"));
-  cGrid.appendChild(ci("Chủ tịch Hội LHPN","<strong>Bà Hoàng Thị Hiền</strong><br><span style='font-size:12px;color:var(--muted)'>Kiêm: Phó Chủ tịch Ủy ban MTTQ Việt Nam xã Bàu Lâm</span><br><span style='font-size:12px;color:var(--muted)'>Tiền nhiệm: Bà Lê Thị Thanh Sang</span>"));
-  cGrid.appendChild(ci("Thông tin trực tuyến","Hoạt động được cập nhật thường xuyên trên <em>Cổng Thông Tin Hội Liên hiệp Phụ nữ Việt Nam</em>."));
-  cBox.appendChild(cGrid);
-
-  const fbBtn=el("a",{href:"https://www.facebook.com/profile.php?id=61578203680234",target:"_blank",className:"fb-btn"});
-  fbBtn.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Trang Facebook Hội LHPN xã Bàu Lâm';
-  cBox.appendChild(fbBtn);
-  sec.appendChild(cBox);page.appendChild(sec);return page;
 }
 
 /* ============================================================  NAV / FOOTER  ============================================================ */
