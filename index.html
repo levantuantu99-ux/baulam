@@ -291,10 +291,18 @@ function renderModal(){
   const item=state.modal;if(!item)return null;
   const overlay=div("modal-overlay");
   overlay.addEventListener("click",e=>{if(e.target===overlay)closeModal();});
+  
   const box=div("modal-box");
-  const closeBtn=el("button",{className:"modal-close",onClick:closeModal});closeBtn.textContent="✕";box.appendChild(closeBtn);
+  const closeBtn=el("button",{className:"modal-close",onClick:closeModal});
+  closeBtn.textContent="✕";
+  box.appendChild(closeBtn);
 
-  if(item._type==="guong"){
+  // MẸO CHỐNG LỖI: Tự động nhận diện dữ liệu dựa trên Trang hiện tại nếu thiếu _type
+  const isGuong = item._type === "guong" || state.page === "guong-sang";
+  const isTacPham = item._type === "tacpham" || state.page === "tac-pham";
+  const isHoiPhuNu = item._type === "hoiphunu" || state.page === "hoi-phu-nu";
+
+  if(isGuong){
     const hasImg=item.anh&&!state.imgErrors["guong_"+item.id];
     if(hasImg){
       const img=el("img",{src:item.anh,alt:item.ten,style:{width:"90px",height:"90px",borderRadius:"50%",objectFit:"cover",objectPosition:"top",marginBottom:"16px",border:"3px solid var(--border)"}});
@@ -321,7 +329,8 @@ function renderModal(){
       const a=el("a",{href:item.bai_bao,target:"_blank",className:"btn-primary",style:"display:flex;justify-content:center;width:100%;"});
       a.textContent="📰 Đọc bài báo về ông Lê Đình Dũng";secBb.appendChild(a);box.appendChild(secBb);
     }
-  } else if(item._type==="tacpham"){
+
+  } else if(isTacPham){
     const hasImg=item.anh_bia&&!state.imgErrors["tp_"+item.id];
     if(hasImg){
       const img=el("img",{src:item.anh_bia,alt:item.ten,style:{width:"120px",borderRadius:"8px",marginBottom:"16px",boxShadow:"0 4px 16px rgba(0,0,0,.15)"}});
@@ -338,7 +347,55 @@ function renderModal(){
       const a=el("a",{href:item.link_online,target:"_blank",className:"btn-primary",style:"display:flex;justify-content:center;width:100%;"});
       a.textContent="📖 Đọc Sách Trực Tuyến (Bản PDF)";secL.appendChild(a);box.appendChild(secL);
     }
+
+  // PHẦN CỦA HỘI PHỤ NỮ (Đã bọc an toàn tuyệt đối)
+  } else if(isHoiPhuNu){
+    // Ép kiểu về dạng chuỗi an toàn
+    const hinhAnh = item.anh || "";
+    const hasImg = hinhAnh.length > 0 && !state.imgErrors["hpn_" + item.id];
+    
+    if(hasImg){
+      const img=el("img",{src:hinhAnh, alt:item.tieu_de || "Ảnh hoạt động", style:{width:"100%",maxHeight:"350px",objectFit:"cover",borderRadius:"8px",marginBottom:"16px",boxShadow:"0 4px 16px rgba(0,0,0,.15)"}});
+      img.onerror=()=>markImgError("hpn_"+item.id);box.appendChild(img);
+    } else {
+      const emo=div("");emo.style.cssText="font-size:56px;margin-bottom:16px;text-align:center;";emo.textContent="📰";box.appendChild(emo);
+    }
+
+    const name=div("modal-name");
+    name.textContent = item.tieu_de || "Hoạt động Hội Phụ Nữ";
+    box.appendChild(name);
+
+    const role=div("modal-role");
+    role.textContent = `📅 Thời gian diễn ra: ${item.ngay || "Đang cập nhật"}`;
+    box.appendChild(role);
+    
+    const tags=div("card-tags");
+    if(item.the_loai) {
+      tags.appendChild(span("tag", item.the_loai));
+    }
+    box.appendChild(tags);
+
+    const sec=div("modal-section");
+    const l1=div("modal-section-label");l1.textContent="Nội dung chi tiết";sec.appendChild(l1);
+    
+    const p=div("modal-text");
+    p.textContent = item.mo_ta || "Chưa có nội dung chi tiết cho hoạt động này.";
+    sec.appendChild(p);
+    box.appendChild(sec);
+
+    // Xử lý nút Link an toàn
+    const linkUrl = item.link || "";
+    if(linkUrl.length > 0){
+      // Đảm bảo linkUrl là string thì mới dùng .includes được, tránh lỗi trắng màn hình
+      const linkString = String(linkUrl);
+      const isYoutube = linkString.includes("youtube.com") || linkString.includes("youtu.be");
+      const secL=div("modal-section");secL.style.marginTop="24px";
+      const a=el("a",{href:linkString,target:"_blank",className:"btn-primary",style:`display:flex;justify-content:center;width:100%;background:${isYoutube ? '#ff0000' : 'var(--primary)'}`});
+      a.textContent= isYoutube ? "▶️ Xem Video YouTube" : "📰 Xem Nguồn Bài Viết";
+      secL.appendChild(a);box.appendChild(secL);
+    }
   }
+  
   overlay.appendChild(box);return overlay;
 }
 
